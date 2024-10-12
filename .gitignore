@@ -6,42 +6,44 @@
 
 # ignores for asp.net
 
-/[Ll]og/
-/[Tt]emp/
-/[Bb]in/
-/[Oo]bj/
+Backend/bin/
+Backend/obj/
+Backend/**/bin/
+Backend/**/obj/
 
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+Backend/bin/Debug/
+Backend/bin/Release/
+Backend/obj/Debug/
+Backend/obj/Release/
 
-mono_crash.*
+Backend/*.user
+Backend/*.suo
+Backend/*.userosscache
+Backend/*.rsuser
+Backend/.vs/
+Backend/*.sln.docstates
+
+Backend/appsettings.json
+Backend/appsettings.Development.json
+Backend/appsettings.Production.json
+
+Backend/*.log
+Backend/logs/
+
+Frontend/node_modules/
+Frontend/.vscode/
+Frontend/dist/
+Frontend/.env
+
+Frontend/.vite/
+Frontend/public/build/
+
+Frontend/yarn.lock
+Frontend/package-lock.json
 
 Thumbs.db
 ehthumbs.db
-
 Desktop.ini
-
 $RECYCLE.BIN/
 
-.vscode/
-
-appsettings.json
-appsettings.Development.json
-appsettings.Production.json
-
-*.log
-
-csx/
-*.build.csdef
-
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-*.nupkg
-*.snupkg
-.nuget/
-packages/
+.DS_Store
