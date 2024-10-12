@@ -34,6 +34,7 @@ Frontend/node_modules/
 Frontend/.vscode/
 Frontend/dist/
 Frontend/.env
+Frontend/obj/
 
 Frontend/.vite/
 Frontend/public/build/
