@@ -1,2 +1,0 @@
-C:\Users\Adrian\Documents\Oskar projekt\JobHunter\Frontend\obj\Debug\Frontend.esproj.CoreCompileInputs.cache
-D:\Programms\team-project\Frontend\obj\Debug\Frontend.esproj.CoreCompileInputs.cache
