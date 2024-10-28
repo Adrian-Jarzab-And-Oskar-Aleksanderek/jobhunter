@@ -1,0 +1,4 @@
+.jh-job-card-container {
+    background: var(--jh-accent-color);
+    border-radius: 5px;
+}

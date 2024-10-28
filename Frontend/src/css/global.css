@@ -1,0 +1,14 @@
+:root {
+    --jh-primary-color: #2C3E50;
+    --jh-secondary-color: #27AE60;
+    --jh-accent-color: #E67E22;
+    --jh-neutral-light-gray: #ECF0F1;
+    --jh-neutral-dark-gray: #7F8C8D;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}

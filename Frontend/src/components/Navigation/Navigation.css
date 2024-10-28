@@ -1,0 +1,7 @@
+.jh-navbar {
+    background: var(--jh-primary-color) !important;
+}
+
+.jh-navbar-text {
+    color: var(--jh-neutral-light-gray) !important;
+}

@@ -1,12 +1,15 @@
-import Navigation from "../components/Navigation.tsx";
-import Footer from "../components/Footer.tsx";
+import Navigation from "../components/Navigation/Navigation.tsx";
+import Footer from "../components/Footer/Footer.tsx";
+import { Container } from "react-bootstrap";
 
 const AboutPage = () => {
     return (
         <>
             <Navigation />
-            <h1>About page</h1>
-            <Footer />
+            <Container fluid className="d-flex flex-column jh-container-fluid" style={{minHeight: '90vh'}}>
+                <h1 className="flex-grow-1">About page</h1>
+            </Container>
+            <Footer/>
         </>
     )
 }

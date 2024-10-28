@@ -1,15 +1,16 @@
 import 'react-bootstrap';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import "./Navigation.css";
 
 const Navigation = () => {
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">
+        <Navbar variant="dark" expand="lg" className="sticky-top jh-navbar">
             <Container>
-                <Navbar.Brand className="me-auto" href="/">JobHunter</Navbar.Brand>
+                <Navbar.Brand className="me-auto jh-navbar-text" href="/">JobHunter</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
+                    <Nav className="ms-auto jh-navbar-text">
                         <LinkContainer to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
