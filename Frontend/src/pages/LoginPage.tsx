@@ -1,6 +1,13 @@
+import Navigation from "../components/Navigation.tsx";
+import Footer from "../components/Footer.tsx";
+
 const LoginPage = () => {
     return (
-        <h1>Login page</h1>
+        <>
+            <Navigation/>
+            <h1>Login page</h1>
+            <Footer/>
+        </>
     )
 }
 

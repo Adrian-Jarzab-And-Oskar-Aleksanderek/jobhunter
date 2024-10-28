@@ -1,6 +1,13 @@
+import Navigation from "../components/Navigation.tsx";
+import Footer from "../components/Footer.tsx";
+
 const ContactPage = () => {
     return (
-        <h1>Contact page</h1>
+        <>
+            <Navigation/>
+            <h1>Contact page</h1>
+            <Footer/>
+        </>
     )
 }
 
