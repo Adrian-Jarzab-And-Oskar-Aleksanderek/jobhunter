@@ -36,6 +36,7 @@ Frontend/dist/
 Frontend/.env
 Frontend/obj/
 Frontend/obj/Debug
+Frontend/obj\\Debug/
 
 Frontend/.vite/
 Frontend/public/build/
