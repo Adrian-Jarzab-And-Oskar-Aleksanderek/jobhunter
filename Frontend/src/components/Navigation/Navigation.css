@@ -1,7 +1,16 @@
 .jh-navbar {
-    background: var(--jh-primary-color) !important;
+    background-color: var(--jh-site-primary) !important;
 }
 
 .jh-navbar-text {
-    color: var(--jh-neutral-light-gray) !important;
+    color: var(--jh-site-secondary) !important;
 }
+
+.custom-navbar-toggle {
+    background-color: var(--jh-site-secondary) !important;
+    color: var(--jh-site-primary) !important;
+    border-radius: 50% !important;
+    padding: 5px !important;
+}
+
+
