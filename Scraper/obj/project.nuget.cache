@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UCrmDSuo9/Q=",
+  "dgSpecHash": "6YazQXHnxHU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Adrian\\Documents\\Oskar projekt\\team-project\\Scraper\\Scraper.csproj",
+  "projectFilePath": "/Users/adrian/Documents/Git/team-project/Scraper/Scraper.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Adrian\\.nuget\\packages\\selenium.webdriver\\4.25.0\\selenium.webdriver.4.25.0.nupkg.sha512"
+    "/Users/adrian/.nuget/packages/selenium.webdriver/4.25.0/selenium.webdriver.4.25.0.nupkg.sha512"
   ],
   "logs": []
 }

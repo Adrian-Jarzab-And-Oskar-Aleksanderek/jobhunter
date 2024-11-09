@@ -23,8 +23,5 @@ internal class Program
         foreach (var x in result) {
             Console.WriteLine(x.Value);
         }
-
-        string z = "asdadsasd";
-        z.Length
     }
 }

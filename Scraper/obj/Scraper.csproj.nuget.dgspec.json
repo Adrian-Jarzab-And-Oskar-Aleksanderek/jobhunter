@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adrian\\Documents\\Oskar projekt\\team-project\\Scraper\\Scraper.csproj": {}
+    "/Users/adrian/Documents/Git/team-project/Scraper/Scraper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adrian\\Documents\\Oskar projekt\\team-project\\Scraper\\Scraper.csproj": {
+    "/Users/adrian/Documents/Git/team-project/Scraper/Scraper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adrian\\Documents\\Oskar projekt\\team-project\\Scraper\\Scraper.csproj",
+        "projectUniqueName": "/Users/adrian/Documents/Git/team-project/Scraper/Scraper.csproj",
         "projectName": "Scraper",
-        "projectPath": "C:\\Users\\Adrian\\Documents\\Oskar projekt\\team-project\\Scraper\\Scraper.csproj",
-        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adrian\\Documents\\Oskar projekt\\team-project\\Scraper\\obj\\",
+        "projectPath": "/Users/adrian/Documents/Git/team-project/Scraper/Scraper.csproj",
+        "packagesPath": "/Users/adrian/.nuget/packages/",
+        "outputPath": "/Users/adrian/Documents/Git/team-project/Scraper/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/adrian/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -71,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/adrian/.dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
