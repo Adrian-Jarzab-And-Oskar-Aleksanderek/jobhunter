@@ -4,8 +4,8 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        Dictionary<string, string> query = new Dictionary<string, string>
-        {// test
+        Dictionary<string, string> query = new()
+        {
         { "companyName", "div[data-test=\"text-earningAmount\"" },
         { "salaryRange", "div[data-test=\"text-earningAmount\"" },
         { "salaryMax", "div[data-test=\"text-earningAmount\"" },
@@ -23,5 +23,8 @@ internal class Program
         foreach (var x in result) {
             Console.WriteLine(x.Value);
         }
+
+        string z = "asdadsasd";
+        z.Length
     }
 }

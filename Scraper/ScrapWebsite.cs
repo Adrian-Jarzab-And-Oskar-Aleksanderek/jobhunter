@@ -32,7 +32,6 @@ public class ScrapWebsite {
             if (!JobOfferValues.ContainsKey(key)) {
                 continue;
             }
-
             var x = QueryResult(query[key]);
             Console.WriteLine($"{key}: {x}");
             JobOfferValues[key] = x;
