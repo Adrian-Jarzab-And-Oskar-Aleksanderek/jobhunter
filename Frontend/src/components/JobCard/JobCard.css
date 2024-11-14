@@ -1,14 +1,4 @@
-.jh-job-card {
-    background: var(--jh-site-accent) !important;
-    border-radius: 5px;
-}
-
-.jh-job-card-button {
-    background: var(--jh-site-accent-red) !important;
-    border-color: var(--jh-site-accent-red) !important;
-    color: var(--jh-site-accent) !important;
-}
-
-.jh-job-card-text-main {
-    color: var(--jh-site-primary) !important;
+.card {
+    background: transparent !important;
+    color: #fff !important;
 }

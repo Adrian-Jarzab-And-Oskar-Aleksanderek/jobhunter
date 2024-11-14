@@ -20,7 +20,7 @@ const HomePage = () => {
     return (
         <>
             <Navigation/>
-            <Container fluid className="d-flex flex-column jh-container-fluid">
+            <Container fluid className="d-flex flex-column">
                 {Array.from({length: 10}).map((_, index) => (
                     <JobCard key={index} position={position} company={company} techStack={techStack}/>
                 ))}

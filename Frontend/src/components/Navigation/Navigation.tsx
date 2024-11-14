@@ -5,7 +5,7 @@ import "./Navigation.css";
 
 const Navigation = () => {
     return (
-        <Navbar variant="dark" expand="lg" className="sticky-top jh-navbar border-bottom">
+        <Navbar variant="dark" expand="lg" className="bg-primary sticky-top border-bottom">
             <Container>
                 <Navbar.Brand className="me-auto jh-navbar-text" href="/">JobHunter</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-navbar-toggle"/>
