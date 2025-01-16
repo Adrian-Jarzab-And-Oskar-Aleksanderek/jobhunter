@@ -12,4 +12,23 @@
     <Folder Include="public\" />
     <Folder Include="src\assets\" />
   </ItemGroup>
+  <ItemGroup>
+    <Script Include="src\.DS_Store" />
+    <Script Include="src\App.tsx" />
+    <Script Include="src\components\Button\Button.tsx" />
+    <Script Include="src\components\Footer\Footer.tsx" />
+    <Script Include="src\components\JobCard\JobCard.tsx" />
+    <Script Include="src\components\Navigation\Navigation.tsx" />
+    <Script Include="src\main.tsx" />
+    <Script Include="src\pages\AboutPage.tsx" />
+    <Script Include="src\pages\ContactPage.tsx" />
+    <Script Include="src\pages\HomePage.tsx" />
+    <Script Include="src\pages\LoginPage.tsx" />
+    <Script Include="src\pages\NoPage.tsx" />
+    <Script Include="src\vite-env.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="**\jsconfig.json" />
+    <TypeScriptConfiguration Remove="**\tsconfig.json" />
+  </ItemGroup>
 </Project>
