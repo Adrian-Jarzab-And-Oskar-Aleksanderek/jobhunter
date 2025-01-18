@@ -12,15 +12,16 @@ public class JobOffertsControler :ControllerBase
         _context = context;
     }
 
-    [HttpGet("/api/offers")]
+    [HttpGet("/api/offers/page/{id}")]
 
-    public IActionResult GetAllJobOfferts()
+    public IActionResult GetAllJobOfferts([FromRoute] int id)
     {
-        var JobOfferts=_context.JobOffers.ToList();
-        return Ok(JobOfferts);
+        var jobOfferts = _context.JobOffers.Skip(30 * id).Take(30).ToList();
+
+        return Ok(jobOfferts);
     }
 
-    [HttpGet("/api/offers/{id}")]
+    [HttpGet("/api/offer/{id}")]
     public IActionResult GetJobOffertById([FromRoute] int id)
     {
         var jobOffert = _context.JobOffers.Find(id);
