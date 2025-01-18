@@ -14,27 +14,38 @@ public class JobOffersControler :ControllerBase
         _context = context;
     }
 
-    [HttpGet("/api/offers/page/{id}")]
-
-    public IActionResult GetAllJobOffers([FromRoute] int id)
+    [HttpGet("/api/offers")]
+    public IActionResult GetAllJobOffers([FromQuery] int page)
     {
+        int resultsPerPage = 30;
+        int totalResults = _context.JobOffers.Count();
+        int totalPages = (int)Math.Ceiling((double)totalResults / resultsPerPage) - 1;
+    
         var jobOffers = _context.JobOffers
+            .Skip(resultsPerPage * page)    
+            .Take(resultsPerPage)
+            .Include(j => j.MultiLocation)
+            .Include(j => j.EmploymentTypes)
+            .ToList();
+        if (page > totalPages)
+        {
+            return Redirect("" + totalPages);
+    
+        }
+    
+        return Ok(new { jobOffers, totalPages });
+    }
+
+
+    [HttpGet("/api/offer")]
+    public IActionResult GetJobOfferById([FromQuery] int id)
+    {
+        var jobOffer = _context.JobOffers
             .Include(j => j.Reviews)
             .Include(j => j.MultiLocation)
             .Include(j => j.EmploymentTypes)
-            .Skip(30 * id)
-            .Take(30)
-            .ToList();
+            .FirstOrDefault(j => j.Id == id);
 
-
-
-        return Ok(jobOffers);
-    }
-
-    [HttpGet("/api/offer/{id}")]
-    public IActionResult GetJobOfferById([FromRoute] int id)
-    {
-        var jobOffer = _context.JobOffers.Find(id);
         if (jobOffer == null)
         {
             return NotFound();
@@ -42,4 +53,5 @@ public class JobOffersControler :ControllerBase
 
         return Ok(jobOffer);
     }
+
 }

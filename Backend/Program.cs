@@ -2,9 +2,18 @@ using Backend.Data;
 using Backend.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Dodaj Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
+
+// Dodaj kontrolery
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -12,16 +21,18 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.MaxDepth = 64;
     });
 
-
+// Dodaj DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Dodaj logging
 builder.Services.AddLogging(logging =>
 {
     logging.ClearProviders();
     logging.AddConsole();
 });
 
+// Dodaj Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -36,7 +47,20 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 
 var app = builder.Build();
 
+// Użyj Swaggera w aplikacji
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.RoutePrefix = string.Empty;  // Swagger UI będzie dostępny na stronie głównej
+    });
+}
+
 app.MapControllers();
+
+// Middleware do logowania zapytań
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.MapGet("/", () => "Hello World!");
