@@ -22,6 +22,7 @@
     <Script Include="src\main.tsx" />
     <Script Include="src\pages\AboutPage.tsx" />
     <Script Include="src\pages\ContactPage.tsx" />
+    <Script Include="src\pages\DetailsPage.tsx" />
     <Script Include="src\pages\HomePage.tsx" />
     <Script Include="src\pages\LoginPage.tsx" />
     <Script Include="src\pages\NoPage.tsx" />
