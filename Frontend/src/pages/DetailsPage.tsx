@@ -1,45 +1,49 @@
 import Navigation from "../components/Navigation/Navigation.tsx";
 import Footer from "../components/Footer/Footer.tsx";
-import {Card, Container} from "react-bootstrap";
+import {Alert, Card, Container, Spinner} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 
+interface Review {
+    $id: string;
+    comment: string;
+    rating: number;
+    createdAt: string;
+    user: string | null;
+}
+
+interface Details {
+    id: number;
+    reviews: { $values: Review[] };
+}
+
 const DetailsPage = () => {
     const { id } = useParams<{ id: string }>();
     const offerId = id ? parseInt(id, 10) : null;
-    const [details, setDetails] = useState({});
+    const [details, setDetails] = useState<Details | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-
-    /*const fetchDetails = async (id: number) => {
-        setLoading(true);
-        setError(null);
-        try {
-            const response = await fetch(`http://localhost:5216/api/offer?id=${id}`, {mode: 'cors'});
-            if (!response.ok) {
-                throw new Error('Error when fetching details');
-            }
-            const data = await response.json();
-            setDetails(data);
-        }catch(err: any) {
-            setError(err.message);
-        }finally {
-            setLoading(false);
-        }
-    };*/
 
     const fetchDetails = async (id: number) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`http://localhost:5216/api/offer?id=${id}`);
+            const response = await fetch(`http://localhost:5216/api/offer?id=${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                mode: 'cors'
+            });
+
             if (!response.ok) {
-                throw new Error('Error when fetching offers');
+                throw new Error('Error when fetching details');
             }
+
             const data = await response.json();
             setDetails(data);
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message);
         } finally {
             setLoading(false);
@@ -47,36 +51,43 @@ const DetailsPage = () => {
     };
     
     useEffect(() => {
-        fetchDetails(offerId);
+        if(offerId){
+            fetchDetails(offerId);
+        }
+        console.log(details);
     }, [offerId]);
-    
+
     const renderReviews = () => {
-        if (details.reviews.$values.length === 0) {
+        if (!details?.reviews.$values.length) {
             return <p>Brak opinii dla tej oferty.</p>;
         }
-        return details.reviews.$values.forEach((review: any) => (
+
+        return details.reviews.$values.map((review) => (
             <Card className="mb-3" key={review.$id}>
                 <Card.Body>
-                    <Card.Title>{review.user}</Card.Title>
+                    <Card.Title>{review.user || 'Anonymous'}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{review.createdAt}</Card.Subtitle>
                     <Card.Text>{review.comment}</Card.Text>
                 </Card.Body>
             </Card>
         ));
     };
-    
+
     return (
         <>
             <Navigation />
-            <Container fluid
-                       className="d-flex jh-container-fluid align-items-start justify-content-center py-2 my-2"
-                       style={{minHeight: '90vh'}}>
-                <h1>Details page</h1>
-                <p>{details.id}</p>
+            <Container fluid className="d-flex jh-container-fluid align-items-start justify-content-center py-2 my-2" style={{ minHeight: '90vh' }}>
+                {loading && <Spinner animation="border" variant="primary" />}
+                {error && <Alert variant="danger">{error}</Alert>}
+                {details && (
+                    <>
+                        {renderReviews()}
+                    </>
+                )}
             </Container>
-            <Footer/>
+            <Footer />
         </>
-    )
+    );
 }
 
 export default DetailsPage;
