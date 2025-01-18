@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom'
 import HomePage from "./pages/HomePage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
@@ -9,7 +9,8 @@ function App() {
       <>
           <Router>
               <Routes>
-                  <Route path="/" element={<HomePage />} />
+                  <Route path="/" element={<Navigate to="/offers/page/0" replace />} />
+                  <Route path="/offers/page/:pageNumber" element={<HomePage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="*" element={<NoPage />} />

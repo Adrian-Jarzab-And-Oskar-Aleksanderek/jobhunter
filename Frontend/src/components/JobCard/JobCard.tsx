@@ -1,14 +1,14 @@
 import "./JobCard.css";
 
-const JobCard = (props: {position: string, company: string, techStack: string[]}) => {
+const JobCard = (props: {title: string, companyName: string, requiredSkills: string[]}) => {
     return (
         <>
             <div className="card border-primary my-3">
-                <div className="card-header">{props.company}</div>
+                <div className="card-header">{props.companyName}</div>
                 <div className="card-body align-items-baseline">
-                    <h4 className="card-title">{props.position}</h4>
+                    <h4 className="card-title">{props.title}</h4>
                     <ul className="card-text p-0">
-                        {props.techStack.map((item, index) => (
+                        {props.requiredSkills.map((item, index) => (
                         <li key={index} className="list-inline-item">| {item} |</li>
                         ))}
                     </ul>
