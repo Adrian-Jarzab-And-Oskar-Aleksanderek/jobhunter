@@ -1,23 +1,24 @@
 import 'react-bootstrap';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import "./Navigation.css";
 
 const Navigation = () => {
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">
+        <Navbar variant="dark" expand="lg" className="bg-primary sticky-top border-bottom">
             <Container>
-                <Navbar.Brand className="me-auto" href="/">JobHunter</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Brand className="me-auto jh-navbar-text" href="/">JobHunter</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-navbar-toggle"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
                         <LinkContainer to="/">
-                            <Nav.Link>Home</Nav.Link>
+                            <Nav.Link className="jh-navbar-text">Home</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/about">
-                            <Nav.Link>About</Nav.Link>
+                            <Nav.Link className="jh-navbar-text">About</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/contact">
-                            <Nav.Link>Contact</Nav.Link>
+                            <Nav.Link className="jh-navbar-text">Contact</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>

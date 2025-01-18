@@ -1,11 +1,17 @@
-import Navigation from "../components/Navigation.tsx";
-import Footer from "../components/Footer.tsx";
+import Navigation from "../components/Navigation/Navigation.tsx";
+import Footer from "../components/Footer/Footer.tsx";
+import { Container } from "react-bootstrap";
+
 
 const ContactPage = () => {
     return (
         <>
-            <Navigation/>
-            <h1>Contact page</h1>
+            <Navigation />
+            <Container fluid
+                       className="d-flex jh-container-fluid align-items-start justify-content-center py-2 my-2"
+                       style={{minHeight: '90vh'}}>
+                <h1>Contact page</h1>
+            </Container>
             <Footer/>
         </>
     )
