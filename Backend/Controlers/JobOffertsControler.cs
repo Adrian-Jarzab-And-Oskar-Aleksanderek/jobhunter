@@ -14,7 +14,7 @@ public class JobOffertsControler :ControllerBase
 
     [HttpGet("/api/offers/page/{id}")]
 
-    public IActionResult GetAllJobOfferts([FromRoute] int id)
+    public IActionResult GetAllJobOffers([FromRoute] int id)
     {
         var jobOfferts = _context.JobOffers.Skip(30 * id).Take(30).ToList();
 
@@ -22,7 +22,7 @@ public class JobOffertsControler :ControllerBase
     }
 
     [HttpGet("/api/offer/{id}")]
-    public IActionResult GetJobOffertById([FromRoute] int id)
+    public IActionResult GetJobOfferById([FromRoute] int id)
     {
         var jobOffert = _context.JobOffers.Find(id);
         if (jobOffert == null)
