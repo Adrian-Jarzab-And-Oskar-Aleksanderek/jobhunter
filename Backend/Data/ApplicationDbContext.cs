@@ -11,33 +11,34 @@ namespace Backend.Data
         public DbSet<JobOffer> JobOffers { get; set; }
         public DbSet<MultiLocation> MultiLocations { get; set; }
         public DbSet<EmploymentType> EmploymentTypes { get; set; }
+        public DbSet<Review> Reviews { get; set; }  // DbSet dla Review
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relacja 1:Wielu z JobOffer -> MultiLocation
+            // Relacja 1:N z JobOffer -> MultiLocation
             modelBuilder.Entity<MultiLocation>()
                 .HasOne(m => m.JobOffer)
                 .WithMany(j => j.MultiLocation)
                 .HasForeignKey(m => m.JobOfferId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Relacja 1:Wielu z JobOffer -> EmploymentType
+            // Relacja 1:N z JobOffer -> EmploymentType
             modelBuilder.Entity<EmploymentType>()
                 .HasOne(e => e.JobOffer)
                 .WithMany(j => j.EmploymentTypes)
                 .HasForeignKey(e => e.JobOfferId)
                 .OnDelete(DeleteBehavior.Cascade);
             
-            // Relacja 1:Wielu z JobOffer -> Review
+            // Relacja 1:N z JobOffer -> Review
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.JobOffer)
                 .WithMany(j => j.Reviews)
                 .HasForeignKey(r => r.JobOfferId)
                 .OnDelete(DeleteBehavior.Cascade);
             
-            // Relacja 1:Wielu z Review -> User
+            // Relacja 1:N z Review -> User
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.User)
                 .WithMany()
