@@ -33,7 +33,7 @@ public class JobOffersControler :ControllerBase
     
         }
     
-        return Ok(new { jobOffers, totalPages });
+        return Ok(new { jobOffers, totalPages, page });
     }
 
 
