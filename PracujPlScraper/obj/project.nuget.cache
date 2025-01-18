@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "kEbUzRjUXek=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Adrian\\Documents\\Git\\team-project\\PracujPlScraper\\PracujPlScraper.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Adrian\\.nuget\\packages\\selenium.webdriver\\4.27.0\\selenium.webdriver.4.27.0.nupkg.sha512"
+  ],
+  "logs": []
+}
