@@ -92,7 +92,7 @@ namespace Scraper
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(
-                        "Server=baza-projektowa.postgres.database.azure.com;Database=postgres;Port=5432;User Id=postgres;Password=TRYONE"));
+                        "Server=baza-projektowa.postgres.database.azure.com;Database=postgres;Port=5432;User Id=postgres;Password=Baza@2025"));
             }
         }
     }
