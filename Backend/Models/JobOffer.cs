@@ -13,9 +13,10 @@ namespace Backend.Models
         public string WorkingTime { get; set; }
         public string ExperienceLevel { get; set; }
         public ICollection<Review>? Reviews { get; set; } = new List<Review>();
-        public List<EmploymentType> EmploymentTypes { get; set; }
+        public ICollection<EmploymentType>? EmploymentTypes { get; set; } = new List<EmploymentType>();
+        
         public int CategoryId { get; set; }
-        public List<MultiLocation> MultiLocation { get; set; }
+        public ICollection<MultiLocation>? MultiLocation { get; set; } = new List<MultiLocation>();
         public string City { get; set; }
         public string Street { get; set; }
         public double Latitude { get; set; }
