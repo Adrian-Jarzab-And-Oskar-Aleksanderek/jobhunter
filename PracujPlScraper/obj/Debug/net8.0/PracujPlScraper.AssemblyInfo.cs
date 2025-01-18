@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PracujPlScraper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+93a509224a2707da5d16b393bd0f073b2eb62cbb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4661bae62e3ab8ce5f6a24dbfad1c804c3e739e")]
 [assembly: System.Reflection.AssemblyProductAttribute("PracujPlScraper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PracujPlScraper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

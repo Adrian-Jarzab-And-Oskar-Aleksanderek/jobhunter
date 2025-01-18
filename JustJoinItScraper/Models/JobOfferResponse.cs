@@ -1,3 +1,5 @@
+using Backend.Models;
+
 namespace Scraper;
 
 public class JobOfferResponse
