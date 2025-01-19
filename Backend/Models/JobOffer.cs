@@ -25,5 +25,4 @@ namespace Backend.Models
         public string PublishedAt { get; set; }
         public bool OpenToHireUkrainians { get; set; }
     }
-
 }
