@@ -1,4 +1,5 @@
 using Backend.Data;
+using Backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,11 +23,14 @@ public class JobOffersControler :ControllerBase
         int totalPages = (int)Math.Ceiling((double)totalResults / resultsPerPage) - 1;
     
         var jobOffers = _context.JobOffers
-            .Skip(resultsPerPage * page)    
+            .Skip(resultsPerPage * page)
             .Take(resultsPerPage)
             .Include(j => j.MultiLocation)
             .Include(j => j.EmploymentTypes)
+            .ToList()
+            .Select(jobOffer => jobOffer.MapToJobOfferDto())
             .ToList();
+        
         if (page > totalPages)
         {
             return Redirect("" + totalPages);
@@ -42,7 +46,8 @@ public class JobOffersControler :ControllerBase
             .Include(j => j.Reviews)
             .Include(j => j.MultiLocation)
             .Include(j => j.EmploymentTypes)
-            .FirstOrDefault(j => j.Id == id);
+            .FirstOrDefault(j => j.Id == id)?
+            .MapToJobOfferDto();
 
         if (jobOffer == null)
         {
