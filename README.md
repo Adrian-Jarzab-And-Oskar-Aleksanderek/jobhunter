@@ -6,7 +6,6 @@
 
 - [Funkcje](#funkcje)
 - [Użyte Technologie](#użyte-technologie)
-- [Demo](#demo)
 - [Rozpoczęcie Pracy](#rozpoczęcie-pracy)
   - [Wymagania Wstępne](#wymagania-wstępne)
   - [Instalacja](#instalacja)
