@@ -116,11 +116,11 @@ const DetailsPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: {
-                    "reviewId": currentReview.id,
-                    "comment": currentReview.comment,
-                    "rating": currentReview.rating
-                }
+                body: JSON.stringify({
+                    reviewId: currentReview.id,
+                    comment: editComment,
+                    rating: editRating
+                })
             });
 
             if (!response.ok) {
@@ -142,6 +142,8 @@ const DetailsPage = () => {
         setAddSuccess(false);
 
         try {
+            console.log(editComment);
+            console.log(editRating);
             const response = await fetch(`http://localhost:5216/api/ReviewControler/create`, {
                 method: 'POST',
                 headers: {
@@ -187,7 +189,7 @@ const DetailsPage = () => {
                 <h5>Employment Types</h5>
                 {details.employmentTypes.$values.map((employment: EmploymentType) => (
                     <Badge key={employment.$id} bg="info" className="me-2 mb-2">
-                        {employment.type.toUpperCase()} {employment.gross ? "(Gross)" : "(Net)"} - {employment.currency.toUpperCase()}
+                        {employment.type.toUpperCase()} {employment.gross ? "(Gross)" : "(Net)"} - {employment.to_Pln || "Not given"} {employment.currency.toUpperCase()}
                     </Badge>
                 ))}
             </div>
@@ -303,7 +305,7 @@ const DetailsPage = () => {
     return (
         <>
             <Navigation/>
-            <Container className="mt-4 mb-5 vh-100">
+            <Container className="mt-4 mb-5">
                 {loading && (
                     <div className="d-flex justify-content-center my-5">
                         <Spinner animation="border" variant="primary"/>
@@ -323,7 +325,7 @@ const DetailsPage = () => {
                     </>
                 )}
             </Container>
-            <Footer/>
+            
             <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Review</Modal.Title>
@@ -362,6 +364,7 @@ const DetailsPage = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <Footer />
         </>
     );
 }

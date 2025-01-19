@@ -60,7 +60,7 @@ namespace Backend.Controllers
             //     return Unauthorized("Nie masz uprawnień do edytowania tej recenzji.");
             // }
 
-            if (!string.IsNullOrEmpty(request.Comment))
+            if (string.IsNullOrEmpty(request.Comment))
             {
                 return NotFound("Review need to have a comment.");
             }
