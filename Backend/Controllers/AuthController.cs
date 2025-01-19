@@ -31,7 +31,7 @@ namespace Backend.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Zwrot błędów ModelState, aby dowiedzieć się, co jest nie tak
+                return BadRequest(ModelState);
             }
 
             var user = await _userManager.FindByNameAsync(model.Username);

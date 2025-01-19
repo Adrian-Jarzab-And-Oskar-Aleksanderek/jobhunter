@@ -20,7 +20,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create(string comment, int rating, int jobOfferId)
+        public async Task<IActionResult> Create([FromBody] string comment, int rating, int jobOfferId)
         {
             var review = new Review { Comment = comment, Rating = rating, JobOfferId = jobOfferId };
             // var userId = _userManager.GetUserId(User);
@@ -29,29 +29,29 @@ namespace Backend.Controllers
             //     return Unauthorized("Nie jesteś zalogowany.");
             // }
 
-            var jobOffer = await _context.JobOffers.FindAsync(jobOfferId);
-            if (jobOffer == null)
-            {
-                return NotFound("Oferta pracy nie została znaleziona.");
-            }
+                var jobOffer = await _context.JobOffers.FindAsync(jobOfferId);
+                if (jobOffer == null)
+                {
+                    return NotFound("Job offer not found.");
+                }
 
-            review.UserId = "741d24fc-739f-4b1d-add1-c4ab006ee0c5";
-            review.JobOfferId = jobOffer.Id;
-            review.CreatedAt = DateTime.UtcNow;
+                review.UserId = "741d24fc-739f-4b1d-add1-c4ab006ee0c5";
+                review.JobOfferId = jobOffer.Id;
+                review.CreatedAt = DateTime.UtcNow;
 
-            _context.Add(review);
-            await _context.SaveChangesAsync();
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Review added", review });
 
-            return Ok(new { message = "Recenzja została dodana", review });
         }
         
         [HttpPost("edit")]
-        public async Task<IActionResult> Edit(int reviewId, string comment, int rating)
+        public async Task<IActionResult> Edit([FromBody] string reviewId, string comment, int rating )
         {
             var review = await _context.Reviews.FindAsync(reviewId);
             if (review == null)
             {
-                return NotFound("Recenzja nie została znaleziona.");
+                return NotFound("Review not found.");
             }
            
             // var userId = _userManager.GetUserId(User);
@@ -62,28 +62,30 @@ namespace Backend.Controllers
 
             if (!string.IsNullOrEmpty(comment))
             {
-                review.Comment = comment;
+                return NotFound("Review need to have a comment.");
             }
-
-            if (rating >= 1 && rating <= 5)
+            if (rating is < 1 or > 5)
             {
-                review.Rating = rating;
-            }
+                return NotFound("Review need to have a rating between 1 and 5.");
 
+            }
+            review.Comment = comment;
+            review.Rating = rating;
+            
             _context.Reviews.Update(review);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Recenzja została zaktualizowana." });
+            return Ok(new { message = "Review edited." });
         }
 
         
         [HttpPost("delete")]
-        public async Task<IActionResult> Delete(int reviewId)
+        public async Task<IActionResult> Delete([FromBody] int reviewId)
         {
             var review = await _context.Reviews.FindAsync(reviewId);
             if (review == null)
             {
-                return NotFound("Recenzja nie została znaleziona.");
+                return NotFound("Review not found.");
             }
 
           
@@ -96,7 +98,7 @@ namespace Backend.Controllers
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Recenzja została usunięta." });
+            return Ok(new { message = "Review deleted." });
         }
 
     }

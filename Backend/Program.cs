@@ -10,10 +10,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Dodanie konfiguracji JWT w pliku appsettings.json
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
-// Rejestracja kontrolerów API
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -21,17 +19,14 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.MaxDepth = 64;
     });
 
-// Rejestracja bazy danych
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// Rejestracja Identity i UserManager/RoleManager
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-// Rejestracja CORS - umożliwiamy dostęp z front-endu React
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", builder =>
@@ -42,7 +37,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Rejestracja logowania przy użyciu JWT
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
@@ -59,24 +53,20 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
-// Rejestracja Swaggera
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 });
 
-// Rejestracja logowania do konsoli
 builder.Services.AddLogging(logging =>
 {
     logging.ClearProviders();
     logging.AddConsole();
 });
 
-// Tworzymy aplikację
 var app = builder.Build();
 
-// Konfiguracja Swaggera w trybie deweloperskim
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -87,17 +77,15 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Konfiguracja middleware
-app.UseMiddleware<RequestLoggingMiddleware>();  // Możesz dodać własny middleware logujący żądania
+app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.UseCors("AllowReactApp");  // Włączenie CORS
+app.UseCors("AllowReactApp");
 
-app.UseAuthentication();  // Użycie autentykacji
-app.UseAuthorization();   // Użycie autoryzacji
+app.UseAuthentication();
+app.UseAuthorization();
 
-app.MapControllers();  // Mapowanie kontrolerów
+app.MapControllers();
 
-// Tworzenie roli i użytkownika administracyjnego, jeśli nie istnieje
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

@@ -14,11 +14,11 @@ public class JobOffersControler :ControllerBase
     {
         _context = context;
     }
-    // [Authorize]
+    
     [HttpGet("/api/offers")]
     public IActionResult GetAllJobOffers([FromQuery] int page)
     {
-        int resultsPerPage = 30;
+        int resultsPerPage = 20;
         int totalResults = _context.JobOffers.Count();
         int totalPages = (int)Math.Ceiling((double)totalResults / resultsPerPage) - 1;
     
@@ -31,9 +31,7 @@ public class JobOffersControler :ControllerBase
         if (page > totalPages)
         {
             return Redirect("" + totalPages);
-    
         }
-    
         return Ok(new { jobOffers, totalPages, page });
     }
 
