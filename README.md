@@ -50,7 +50,7 @@ Upewnij się, że masz zainstalowane poniższe narzędzia:
 
 ### Instalacja
 
-git clone https://github.com/yourusername/JobHunter.git
+git clone git@github.com:oaleksanderek/team-project.git
 
 ### Uruchomienie Aplikacji
 
