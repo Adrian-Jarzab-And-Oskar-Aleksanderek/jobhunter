@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;

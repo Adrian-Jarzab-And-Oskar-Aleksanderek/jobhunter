@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-
 namespace Backend.Middleware
 {
     public class RequestLoggingMiddleware

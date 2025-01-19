@@ -79,7 +79,7 @@ const DetailsPage = () => {
         }
     };
 
-    const handleDelete = async (reviewId: string) => {
+    const handleDelete = async (reviewId: number) => {
         if (!window.confirm("Are you sure you want to delete this review?")) return;
 
         try {
@@ -219,7 +219,7 @@ const DetailsPage = () => {
                                             onClick={() => handleEdit(review)}>
                                         Edit
                                     </Button>
-                                    <Button variant="outline-danger" size="sm" onClick={() => handleDelete(review.$id)}>
+                                    <Button variant="outline-danger" size="sm" onClick={() => handleDelete(review.id)}>
                                         Delete
                                     </Button>
                                 </div>
