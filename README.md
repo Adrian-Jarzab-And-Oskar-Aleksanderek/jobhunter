@@ -11,7 +11,6 @@
   - [Wymagania Wstępne](#wymagania-wstępne)
   - [Instalacja](#instalacja)
   - [Uruchomienie Aplikacji](#uruchomienie-aplikacji)
-- [Struktura Projektu](#struktura-projektu)
 - [Kontakt](#kontakt)
 
 ## Funkcje
@@ -61,48 +60,6 @@ dotnet run
 
 cd Frontend
 npm run
-
-### Struktura Projektu
-
-JobHunter/
-├── Backend/
-│   ├── Controllers/
-│   │   ├── OfferController.cs
-│   │   └── ReviewController.cs
-│   ├── Data/
-│   │   └── ApplicationDbContext.cs
-│   ├── Models/
-│   │   ├── JobOffer.cs
-│   │   └── Review.cs
-│   ├── Migrations/
-│   ├── Program.cs
-│   └── appsettings.json
-├── Frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Footer/
-│   │   │   │   ├── Footer.tsx
-│   │   │   │   └── Footer.css
-│   │   │   ├── Navigation/
-│   │   │   │   ├── Navigation.tsx
-│   │   │   │   └── Navigation.css
-│   │   ├── pages/
-│   │   │   ├── AboutPage.tsx
-│   │   │   ├── ContactPage.tsx
-│   │   │   ├── DetailsPage.tsx
-│   │   │   ├── HomePage.tsx
-│   │   │   └── NoPage.tsx
-│   │   ├── styles/
-│   │   │   ├── AboutPage.css
-│   │   │   ├── ContactPage.css
-│   │   │   └── DetailsPage.css
-│   │   ├── App.tsx
-│   │   ├── App.css
-│   │   └── index.tsx
-│   └── package.json
-├── README.md
-└── LICENSE
 
 ### Kontakt
 
