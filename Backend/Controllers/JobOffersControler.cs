@@ -1,4 +1,5 @@
 using Backend.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ public class JobOffersControler :ControllerBase
     {
         _context = context;
     }
-
+    [Authorize]
     [HttpGet("/api/offers")]
     public IActionResult GetAllJobOffers([FromQuery] int page)
     {

@@ -4,6 +4,7 @@ import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import NoPage from "./pages/NoPage.tsx";
 import DetailsPage from "./pages/DetailsPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 function App() {
 
   return (
@@ -15,6 +16,7 @@ function App() {
                   <Route path="/offers/:id" element={<DetailsPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/login" element={<LoginPage />} />
                   <Route path="*" element={<NoPage />} />
               </Routes>
           </Router>

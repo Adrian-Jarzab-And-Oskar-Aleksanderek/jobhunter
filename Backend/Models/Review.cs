@@ -16,7 +16,7 @@ public class Review
     [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5.")]
     public int Rating { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     [ForeignKey("JobOffer")]
     public int JobOfferId { get; set; }
