@@ -8,4 +8,5 @@ using System.ComponentModel.DataAnnotations;
 public class User : IdentityUser
 {
     public ICollection<Review> Reviews { get; set; }
+    
 }
