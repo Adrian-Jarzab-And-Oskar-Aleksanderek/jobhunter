@@ -14,6 +14,7 @@ public class JobOffersControler :ControllerBase
     {
         _context = context;
     }
+    
     [HttpGet("/api/offers")]
     public IActionResult GetAllJobOffers([FromQuery] int page)
     {
