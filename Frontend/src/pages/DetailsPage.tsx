@@ -1,12 +1,13 @@
 import Navigation from "../components/Navigation/Navigation.tsx";
 import Footer from "../components/Footer/Footer.tsx";
-import {Alert, Badge, Card, Col, Container, Row, Spinner} from "react-bootstrap";
+import {Alert, Badge, Button, Card, Col, Container, Form, Modal, Row, Spinner} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 
 interface Review {
     $id: string;
+    id: number;
     comment: string;
     rating: number;
     createdAt: string;
@@ -42,6 +43,17 @@ const DetailsPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
+    const [currentReview, setCurrentReview] = useState<Review | null>(null);
+    const [editComment, setEditComment] = useState<string>('');
+    const [editRating, setEditRating] = useState<number>(1);
+
+    const [newComment, setNewComment] = useState<string>('');
+    const [newRating, setNewRating] = useState<number>(1);
+    const [addingReview, setAddingReview] = useState<boolean>(false);
+    const [addError, setAddError] = useState<string | null>(null);
+    const [addSuccess, setAddSuccess] = useState<boolean>(false);
+
     const fetchDetails = async (id: number) => {
         setLoading(true);
         setError(null);
@@ -64,6 +76,97 @@ const DetailsPage = () => {
             setError(err.message);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleDelete = async (reviewId: string) => {
+        if (!window.confirm("Are you sure you want to delete this review?")) return;
+
+        try {
+            const response = await fetch(`http://localhost:5216/api/ReviewControler/delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ reviewId: reviewId })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete review.');
+            }
+
+            fetchDetails(offerId!);
+        } catch (err: any) {
+            alert(err.message || 'Something went wrong while deleting the review.');
+        }
+    };
+
+    const handleEdit = (review: Review) => {
+        setCurrentReview(review);
+        setEditComment(review.comment);
+        setEditRating(review.rating);
+        setShowEditModal(true);
+    };
+    const submitEdit = async () => {
+        if (!currentReview) return;
+
+        try {
+            const response = await fetch(`http://localhost:5216/api/ReviewControler/edit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: {
+                    "reviewId": currentReview.id,
+                    "comment": currentReview.comment,
+                    "rating": currentReview.rating
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to edit review.');
+            }
+
+            setShowEditModal(false);
+            setCurrentReview(null);
+            fetchDetails(offerId!);
+        } catch (err: any) {
+            alert(err.message || 'Something went wrong while editing the review.');
+        }
+    };
+
+    const handleAddReview = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setAddingReview(true);
+        setAddError(null);
+        setAddSuccess(false);
+
+        try {
+            const response = await fetch(`http://localhost:5216/api/ReviewControler/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    comment: newComment,
+                    rating: newRating,
+                    jobOfferId: offerId
+                })
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message || 'Failed to add review.');
+            }
+
+            setAddSuccess(true);
+            setNewComment('');
+            setNewRating(1);
+            fetchDetails(offerId!);
+        } catch (err: any) {
+            setAddError(err.message || 'Something went wrong while adding the review.');
+        } finally {
+            setAddingReview(false);
         }
     };
     
@@ -103,11 +206,21 @@ const DetailsPage = () => {
                         <Card className="h-100 shadow-sm">
                             <Card.Body>
                                 <Card.Title>{review.user || 'Anonymous'}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{new Date(review.createdAt).toLocaleDateString()}</Card.Subtitle>
+                                <Card.Subtitle
+                                    className="mb-2 text-muted">{new Date(review.createdAt).toLocaleDateString()}</Card.Subtitle>
                                 <Card.Text>{review.comment}</Card.Text>
                                 <Badge bg="warning" text="dark">
                                     Rating: {review.rating}/5
                                 </Badge>
+                                <div className="mt-3">
+                                    <Button variant="outline-primary" size="sm" className="me-2"
+                                            onClick={() => handleEdit(review)}>
+                                        Edit
+                                    </Button>
+                                    <Button variant="outline-danger" size="sm" onClick={() => handleDelete(review.$id)}>
+                                        Delete
+                                    </Button>
+                                </div>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -141,7 +254,7 @@ const DetailsPage = () => {
                             </Badge>
                         )}
                     </div>
-                    
+
                     <Card.Text className="fs-6">
                         City: {details.city}
                     </Card.Text>
@@ -151,6 +264,37 @@ const DetailsPage = () => {
                     <Card.Text className="fs-6">
                         Experience level: {details.experienceLevel}
                     </Card.Text>
+                    <h5 className="mt-4">Add a Review</h5>
+                    {addError && <Alert variant="danger">{addError}</Alert>}
+                    {addSuccess && <Alert variant="success">Your review has been added successfully!</Alert>}
+                    <Form onSubmit={handleAddReview}>
+                        <Form.Group className="mb-3" controlId="formComment">
+                            <Form.Label>Comment</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                placeholder="Enter your comment"
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formRating">
+                            <Form.Label>Rating</Form.Label>
+                            <Form.Select value={newRating} onChange={(e) => setNewRating(parseInt(e.target.value, 10))}
+                                         required>
+                                <option value={1}>1 - Very Bad</option>
+                                <option value={2}>2 - Bad</option>
+                                <option value={3}>3 - Okay</option>
+                                <option value={4}>4 - Good</option>
+                                <option value={5}>5 - Excellent</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Button variant="primary" type="submit" disabled={addingReview}>
+                            {addingReview ? <Spinner as="span" animation="border" size="sm" role="status"
+                                                     aria-hidden="true"/> : 'Add Review'}
+                        </Button>
+                    </Form>
                 </Card.Body>
             </Card>
         );
@@ -158,11 +302,11 @@ const DetailsPage = () => {
 
     return (
         <>
-            <Navigation />
+            <Navigation/>
             <Container className="mt-4 mb-5 vh-100">
                 {loading && (
                     <div className="d-flex justify-content-center my-5">
-                        <Spinner animation="border" variant="primary" />
+                        <Spinner animation="border" variant="primary"/>
                     </div>
                 )}
                 {error && (
@@ -179,7 +323,45 @@ const DetailsPage = () => {
                     </>
                 )}
             </Container>
-            <Footer />
+            <Footer/>
+            <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Review</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {currentReview && (
+                        <Form>
+                            <Form.Group className="mb-3" controlId="editComment">
+                                <Form.Label>Comment</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    value={editComment}
+                                    onChange={(e) => setEditComment(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="editRating">
+                                <Form.Label>Rating</Form.Label>
+                                <Form.Select value={editRating} onChange={(e) => setEditRating(parseInt(e.target.value, 10))}>
+                                    <option value={1}>1 - Very Bad</option>
+                                    <option value={2}>2 - Bad</option>
+                                    <option value={3}>3 - Okay</option>
+                                    <option value={4}>4 - Good</option>
+                                    <option value={5}>5 - Excellent</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Form>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={submitEdit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }
