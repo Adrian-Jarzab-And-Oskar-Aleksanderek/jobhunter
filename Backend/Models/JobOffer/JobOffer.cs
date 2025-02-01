@@ -1,3 +1,4 @@
+
 namespace Backend.Models
 {
     public class JobOffer
@@ -10,7 +11,7 @@ namespace Backend.Models
         public string WorkplaceType { get; set; }
         public string WorkingTime { get; set; }
         public string ExperienceLevel { get; set; }
-        public ICollection<Review>? Reviews { get; set; } = new List<Review>();
+        public ICollection<Review.Review>? Reviews { get; set; } = new List<Review.Review>();
         public ICollection<EmploymentType>? EmploymentTypes { get; set; } = new List<EmploymentType>();
         
         public int CategoryId { get; set; }

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models;
+namespace Backend.Models.Review;
 
 public class ReviewCreateRequest
 {
