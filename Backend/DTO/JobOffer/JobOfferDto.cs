@@ -1,6 +1,4 @@
-using Backend.Models;
-
-namespace Backend.DTO;
+namespace Backend.DTO.JobOffer;
 
 public class JobOfferDto
 {

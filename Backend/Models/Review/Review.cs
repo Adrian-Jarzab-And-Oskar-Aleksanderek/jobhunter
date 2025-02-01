@@ -1,11 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-
-namespace Backend.Models;
-
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
+
+namespace Backend.Models.Review;
 
 public class Review
 {
@@ -27,5 +23,5 @@ public class Review
     [ForeignKey("User")]
     public string? UserId { get; set; }
 
-    public IdentityUser? User { get; set; }
+    public User? User { get; set; }
 }
