@@ -1,5 +1,5 @@
 
-namespace Backend.Models
+namespace Backend.Models.JobOffer
 {
     public class JobOffer
     {

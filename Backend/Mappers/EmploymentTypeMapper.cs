@@ -1,5 +1,6 @@
 using Backend.DTO;
-using Backend.Models;
+using Backend.DTO.JobOffer;
+using Backend.Models.JobOffer;
 
 namespace Backend.Mappers;
 

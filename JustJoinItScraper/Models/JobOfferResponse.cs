@@ -1,6 +1,5 @@
-using Backend.Models;
-
-namespace Scraper;
+using Backend.Models.JobOffer;
+namespace Scraper.Models;
 
 public class JobOfferResponse
 {

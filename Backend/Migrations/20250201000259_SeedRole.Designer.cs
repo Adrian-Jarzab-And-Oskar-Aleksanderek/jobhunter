@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250201000259_SeedRole")]
+    partial class SeedRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,13 +263,13 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ba0aef66-bb2f-45f4-8598-63429e0f1400",
+                            Id = "47e4e882-5884-41cc-bf4a-c96c5579f80f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a7a894d1-1f90-4049-9e58-ae3e147d8412",
+                            Id = "f208f204-d063-4804-9d57-5fa50dbbd081",
                             Name = "User",
                             NormalizedName = "USER"
                         });

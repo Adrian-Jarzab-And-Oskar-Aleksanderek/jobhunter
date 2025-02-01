@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Backend.Models
+namespace Backend.Models.JobOffer
 {
     public class MultiLocation
     {

@@ -1,4 +1,4 @@
-namespace Scraper;
+namespace Scraper.Models;
 
 public class Meta
 {

@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Backend.Models.Review;
 
 public class Review
@@ -18,7 +17,7 @@ public class Review
     [ForeignKey("JobOffer")]
     public int JobOfferId { get; set; }
 
-    public JobOffer? JobOffer { get; set; }
+    public JobOffer.JobOffer? JobOffer { get; set; }
     
     [ForeignKey("User")]
     public string? UserId { get; set; }

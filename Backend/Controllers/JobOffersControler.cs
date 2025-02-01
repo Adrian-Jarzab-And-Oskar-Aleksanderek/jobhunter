@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers;
 
+
+[Route("api/[Controller]")]
 [ApiController]
 public class JobOffersControler :ControllerBase
 {
@@ -30,11 +32,10 @@ public class JobOffersControler :ControllerBase
             .ToList()
             .Select(jobOffer => jobOffer.MapToJobOfferDto())
             .ToList();
-        
+
         if (page > totalPages)
-        {
             return Redirect("" + totalPages);
-        }
+        
         return Ok(new { jobOffers, totalPages, page });
     }
 
