@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250131231306_Indentity")]
+    partial class Indentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,7 +26,7 @@ namespace Backend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Backend.Models.JobOffer.EmploymentType", b =>
+            modelBuilder.Entity("Backend.Models.EmploymentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,7 +91,7 @@ namespace Backend.Migrations
                     b.ToTable("EmploymentTypes");
                 });
 
-            modelBuilder.Entity("Backend.Models.JobOffer.JobOffer", b =>
+            modelBuilder.Entity("Backend.Models.JobOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,7 +166,7 @@ namespace Backend.Migrations
                     b.ToTable("JobOffers");
                 });
 
-            modelBuilder.Entity("Backend.Models.JobOffer.MultiLocation", b =>
+            modelBuilder.Entity("Backend.Models.MultiLocation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,7 +202,7 @@ namespace Backend.Migrations
                     b.ToTable("MultiLocations");
                 });
 
-            modelBuilder.Entity("Backend.Models.Review.Review", b =>
+            modelBuilder.Entity("Backend.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,20 +259,6 @@ namespace Backend.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ba0aef66-bb2f-45f4-8598-63429e0f1400",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "a7a894d1-1f90-4049-9e58-ae3e147d8412",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -458,9 +447,9 @@ namespace Backend.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("Backend.Models.JobOffer.EmploymentType", b =>
+            modelBuilder.Entity("Backend.Models.EmploymentType", b =>
                 {
-                    b.HasOne("Backend.Models.JobOffer.JobOffer", "JobOffer")
+                    b.HasOne("Backend.Models.JobOffer", "JobOffer")
                         .WithMany("EmploymentTypes")
                         .HasForeignKey("JobOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -469,9 +458,9 @@ namespace Backend.Migrations
                     b.Navigation("JobOffer");
                 });
 
-            modelBuilder.Entity("Backend.Models.JobOffer.MultiLocation", b =>
+            modelBuilder.Entity("Backend.Models.MultiLocation", b =>
                 {
-                    b.HasOne("Backend.Models.JobOffer.JobOffer", "JobOffer")
+                    b.HasOne("Backend.Models.JobOffer", "JobOffer")
                         .WithMany("MultiLocation")
                         .HasForeignKey("JobOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -480,9 +469,9 @@ namespace Backend.Migrations
                     b.Navigation("JobOffer");
                 });
 
-            modelBuilder.Entity("Backend.Models.Review.Review", b =>
+            modelBuilder.Entity("Backend.Models.Review", b =>
                 {
-                    b.HasOne("Backend.Models.JobOffer.JobOffer", "JobOffer")
+                    b.HasOne("Backend.Models.JobOffer", "JobOffer")
                         .WithMany("Reviews")
                         .HasForeignKey("JobOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -549,7 +538,7 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Backend.Models.JobOffer.JobOffer", b =>
+            modelBuilder.Entity("Backend.Models.JobOffer", b =>
                 {
                     b.Navigation("EmploymentTypes");
 

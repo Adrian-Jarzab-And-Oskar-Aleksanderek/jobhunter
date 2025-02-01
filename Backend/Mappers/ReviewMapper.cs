@@ -1,5 +1,6 @@
 using Backend.DTO;
 using Backend.Models;
+using Backend.Models.Review;
 
 namespace Backend.Mappers;
 
