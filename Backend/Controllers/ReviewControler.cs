@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Backend.Data;
 using Backend.Models;
 using Backend.Models.Review;
@@ -15,11 +16,9 @@ namespace Backend.Controllers
     public class ReviewControler : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<User> _userManager;    
         public ReviewControler(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         [HttpPost("create")]
@@ -33,17 +32,8 @@ namespace Backend.Controllers
             if (jobOffer == null)
                 return NotFound("Job offer not found.");
             
-            var authorizationHeader = Request.Headers["Authorization"].ToString();
-            var jwtHandler = new JwtSecurityTokenHandler();
-            var token = authorizationHeader.Substring("Bearer ".Length).Trim();
-            var jwtToken = jwtHandler.ReadJwtToken(token);
-            var userName = jwtToken.Payload["given_name"]?.ToString();
+            var userName = User.FindFirstValue(ClaimTypes.GivenName);
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
-            
-            if (user == null)
-            {
-                return Unauthorized("Please login to create review.");
-            }
             
             var review = new Review
             {
@@ -71,19 +61,12 @@ namespace Backend.Controllers
             if (review == null)
                 return NotFound("Review not found.");
             
-            var authorizationHeader = Request.Headers["Authorization"].ToString();
-            var jwtHandler = new JwtSecurityTokenHandler();
-            var token = authorizationHeader.Substring("Bearer ".Length).Trim();
-            var jwtToken = jwtHandler.ReadJwtToken(token);
-            var userName = jwtToken.Payload["given_name"]?.ToString();
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            var userName = User.FindFirstValue(ClaimTypes.GivenName);
+            var userId = await _context.Users.Where(u => u.UserName == userName)
+                .Select(u => u.Id)
+                .FirstOrDefaultAsync();
             
-            if (user == null)
-            {
-                return Unauthorized("Please login to edit review.");
-            }
-            
-            if (review.UserId != user.Id)
+            if (review.UserId != userId)
             {
                 return Unauthorized("You can't edit this review.");
             }
@@ -114,20 +97,12 @@ namespace Backend.Controllers
             if (review == null)
                 return NotFound("Review not found.");
             
-            var authorizationHeader = Request.Headers["Authorization"].ToString();
-            var jwtHandler = new JwtSecurityTokenHandler();
-            var token = authorizationHeader.Substring("Bearer ".Length).Trim();
-            var jwtToken = jwtHandler.ReadJwtToken(token);
-            var userName = jwtToken.Payload["given_name"]?.ToString();
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            var userName = User.FindFirstValue(ClaimTypes.GivenName);
+            var userId = await _context.Users.Where(u => u.UserName == userName)
+                .Select(u => u.Id)
+                .FirstOrDefaultAsync();
             
-            if (user == null)
-            {
-                return Unauthorized("Please login to delete review.");
-            }
-            
-            
-            if (review.UserId != user.Id)
+            if (review.UserId != userId)
             {
                 return Unauthorized("You can't delete this review.");
             }
@@ -135,7 +110,6 @@ namespace Backend.Controllers
             
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
-
             return Ok(new { message = "Review deleted." });
         }
 

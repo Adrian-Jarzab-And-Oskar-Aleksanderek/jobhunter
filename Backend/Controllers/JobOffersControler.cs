@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Controllers;
 
 
-[Route("api/[Controller]")]
+[Route("api/JobOffers")]
 [ApiController]
 public class JobOffersControler :ControllerBase
 {
