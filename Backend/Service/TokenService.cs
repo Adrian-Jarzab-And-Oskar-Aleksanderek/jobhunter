@@ -12,7 +12,6 @@ public class TokenService : ITokenService
 {
     private readonly IConfiguration _configuration;
     private readonly SymmetricSecurityKey _key;
-    private ITokenService _tokenServiceImplementation;
 
     public TokenService(IConfiguration configuration)
     {

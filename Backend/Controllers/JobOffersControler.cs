@@ -1,7 +1,11 @@
+using System.Text.Json;
 using Backend.Data;
 using Backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+using Microsoft.Extensions.Options;
 
 namespace Backend.Controllers;
 
@@ -11,16 +15,28 @@ namespace Backend.Controllers;
 public class JobOffersControler :ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IDistributedCache _cache;
+    private readonly JsonSerializerOptions _jsonOptions;
 
-    public JobOffersControler(ApplicationDbContext context)
+    public JobOffersControler(ApplicationDbContext context, IDistributedCache cache, IOptions<JsonOptions> jsonOptions)
     {
         _context = context;
+        _cache = cache;
+        _jsonOptions = jsonOptions.Value.JsonSerializerOptions;
     }
     
     [HttpGet("/api/offers")]
-    public IActionResult GetAllJobOffers([FromQuery] int page)
+    public async Task<IActionResult> GetAllJobOffers([FromQuery] int page)
     {
         int resultsPerPage = 20;
+        
+        string cacheKey = $"jobOffers{page}";
+        var cachedJobOffers = await _cache.GetStringAsync(cacheKey);
+        if (!string.IsNullOrEmpty(cachedJobOffers))
+        {
+            return Ok(JsonSerializer.Deserialize<object>(cachedJobOffers)); 
+        }
+
         int totalResults = _context.JobOffers.Count();
         int totalPages = (int)Math.Ceiling((double)totalResults / resultsPerPage) - 1;
     
@@ -36,13 +52,27 @@ public class JobOffersControler :ControllerBase
         if (page > totalPages)
             return Redirect("" + totalPages);
         
-        return Ok(new { jobOffers, totalPages, page });
+        var response = new { jobOffers, totalPages, page };
+        var cacheOptions = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+            SlidingExpiration = TimeSpan.FromSeconds(30)
+        };
+        await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(response,_jsonOptions), cacheOptions);
+        return Ok(response);
     }
 
 
     [HttpGet("/api/offer")]
-    public IActionResult GetJobOfferById([FromQuery] int id)
+    public async Task<IActionResult> GetJobOfferById([FromQuery] int id)
     {
+        string cacheKey = $"jobOffer_{id}";
+        
+        var cachedJobOffer = await _cache.GetStringAsync(cacheKey);
+        if (!string.IsNullOrEmpty(cachedJobOffer))
+        {
+            return Ok(JsonSerializer.Deserialize<object>(cachedJobOffer));
+        }
         var jobOffer = _context.JobOffers
             .Include(j => j.Reviews)
             .Include(j => j.MultiLocation)
@@ -54,7 +84,14 @@ public class JobOffersControler :ControllerBase
         {
             return NotFound();
         }
-
+        
+        var cacheOptions = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+            SlidingExpiration = TimeSpan.FromSeconds(60)
+        };
+        await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(jobOffer, _jsonOptions), cacheOptions);
+        
         return Ok(jobOffer);
     }
 

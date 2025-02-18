@@ -1,6 +1,6 @@
 namespace Backend.DTO.Account;
 
-public class NewUserDTO
+public class NewUserDto
 {
     public string UserName { get; set; }
 
