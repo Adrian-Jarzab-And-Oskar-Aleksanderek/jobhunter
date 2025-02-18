@@ -10,10 +10,8 @@ namespace Backend.Data
 {
 
 
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
         public DbSet<JobOffer> JobOffers { get; set; }
         public DbSet<MultiLocation> MultiLocations { get; set; }
         public DbSet<EmploymentType> EmploymentTypes { get; set; }

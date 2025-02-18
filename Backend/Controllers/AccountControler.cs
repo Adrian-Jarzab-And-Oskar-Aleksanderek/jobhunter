@@ -45,7 +45,7 @@ public class AccountController :ControllerBase
                 if (roleResult.Succeeded)
                 {
                     return Ok(
-                        new NewUserDTO
+                        new NewUserDto
                         {
                             UserName = User.UserName,
                             Email = User.Email,
@@ -84,7 +84,7 @@ public class AccountController :ControllerBase
         if(!result.Succeeded)
             return Unauthorized("Invalid username or password");
 
-        return Ok(new NewUserDTO
+        return Ok(new NewUserDto
         {
             UserName = user.UserName,
             Email = user.Email,
