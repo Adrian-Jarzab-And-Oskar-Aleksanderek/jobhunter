@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Models.JobOffer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -38,22 +39,23 @@ namespace Scraper
             client.DefaultRequestHeaders.Add("x-ga", "GA1.1.366351086.1728371165");
             client.DefaultRequestHeaders.UserAgent.ParseAdd(
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36");
-            using var scope = serviceProvider.CreateScope();
-
+             using var scope = serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
             API_GET api = new API_GET(client);
-            int i = 1;
-            int pages = 0;
+            int page = 1, totalPages = 0;
+            
+            var existingSkills = dbContext.Skills
+                .ToDictionary(s => s.Name, s => s);
+
+            List<Skill> newSkills = new List<Skill>();
+            List<JobOffer> jobOffersToAdd = new List<JobOffer>();
             do
             {
-
-                string url = "https://api.justjoin.it/v2/user-panel/offers?&page=" + i +
-                             "&sortBy=published&orderBy=DESC&perPage=100&salaryCurrencies=PLN";
+                string url = $"https://api.justjoin.it/v2/user-panel/offers?page={page}&sortBy=published&orderBy=DESC&perPage=100&salaryCurrencies=PLN";
                 try
                 {
                     HttpResponseMessage response = await api.GetResponseAsync(url);
-
                     string content = await api.DecodeResponseContentAsync(response);
 
                     if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -62,35 +64,89 @@ namespace Scraper
                         break;
                     }
 
-                    try
+                    var jobOffers = JsonConvert.DeserializeObject<JobOfferResponse>(content);
+                    if (jobOffers == null || jobOffers.Meta == null)
                     {
-                        var jobOffers = JsonConvert.DeserializeObject<JobOfferResponse>(content);
-                        pages = jobOffers.Meta.TotalPages;
+                        Console.WriteLine("Deserialization returned null or Meta is null.");
+                        continue;
+                    }
 
-                        foreach (var offer in jobOffers.Data)
-                        {
-                            dbContext.JobOffers.Add(offer);
-                        }
-                    }
-                    catch (JsonReaderException jre)
+                    totalPages = jobOffers.Meta.TotalPages;
+
+                    foreach (var offer in jobOffers.Data)
                     {
-                        Console.WriteLine($"Deserialization error: {jre.Message}");
+                        var newJobOffer = new JobOffer
+                        {
+                            Slug = offer.Slug,
+                            Title = offer.Title,
+                            WorkplaceType = offer.WorkplaceType,
+                            WorkingTime = offer.WorkingTime,
+                            ExperienceLevel = offer.ExperienceLevel,
+                            CategoryId = offer.CategoryId,
+                            City = offer.City,
+                            Street = offer.Street,
+                            Latitude = offer.Latitude,
+                            Longitude = offer.Longitude,
+                            RemoteInterview = offer.RemoteInterview,
+                            CompanyName = offer.CompanyName,
+                            CompanyLogoThumbUrl = offer.CompanyLogoThumbUrl,
+                            PublishedAt = offer.PublishedAt,
+                            OpenToHireUkrainians = offer.OpenToHireUkrainians,
+                            JobOfferRequiredSkills = new List<JobOfferRequiredSkills>(),
+                            MultiLocation = offer.MultiLocation,
+                            EmploymentTypes = offer.EmploymentTypes
+                        };
+
+                        if (offer.RequiredSkills == null)
+                        {
+                            offer.RequiredSkills = new List<string>();
+                        }
+
+                        foreach (var skillName in offer.RequiredSkills)
+                        {
+                            if (!existingSkills.TryGetValue(skillName, out var existingSkill))
+                            {
+                                existingSkill = new Skill { Name = skillName };
+                                newSkills.Add(existingSkill);
+                                existingSkills[skillName] = existingSkill;
+                            }
+
+                            newJobOffer.JobOfferRequiredSkills.Add(new JobOfferRequiredSkills
+                            {
+                                Skill = existingSkill
+                            });
+                        }
+
+                        jobOffersToAdd.Add(newJobOffer);
                     }
+
                 }
-                catch (HttpRequestException ex)
+                catch (Exception ex)
                 {
-                    Console.WriteLine($"Request error: {ex.Message}");
+                    Console.WriteLine($"Error: {ex.Message}");
                 }
-                i++;
-                
-            } while (i != pages);
+                page++;
+                Console.WriteLine($"Page {page} of {totalPages}.");
+            } while (page < totalPages);
+            
+            if (newSkills.Count > 0)
+            {
+                dbContext.Skills.AddRange(newSkills);
+                await dbContext.SaveChangesAsync();
+            }
+
+            if (jobOffersToAdd.Count > 0)
+            {
+                dbContext.JobOffers.AddRange(jobOffersToAdd);
+            }
             await dbContext.SaveChangesAsync();
         }
+
         static void ConfigureServices(IServiceCollection services)
-            {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseNpgsql(
-                        "Server=baza-projektowa.postgres.database.azure.com;Database=postgres;Port=5432;User Id=postgres;Password=Baza@2025"));
-            }
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(
+                    "Server=baza-projektowa.postgres.database.azure.com;Database=jobhunter;Port=5432;User Id=postgres;Password=Baza@2025"));
         }
     }
+}
