@@ -13,7 +13,7 @@ function App() {
               <Routes>
                   <Route path="/" element={<Navigate to="/offers/page/0" replace />} />
                   <Route path="/offers/page/:pageNumber" element={<HomePage />} />
-                  <Route path="/offers/:id" element={<DetailsPage />} />
+                      <Route path="/offers/:id" element={<DetailsPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/login" element={<LoginPage />} />

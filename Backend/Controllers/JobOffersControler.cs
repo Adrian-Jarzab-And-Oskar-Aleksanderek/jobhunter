@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Backend.Data;
 using Backend.Mappers;
+using Backend.Service.Caching;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -17,7 +18,6 @@ public class JobOffersControler :ControllerBase
     private readonly ApplicationDbContext _context;
     private readonly IDistributedCache _cache;
     private readonly JsonSerializerOptions _jsonOptions;
-
     public JobOffersControler(ApplicationDbContext context, IDistributedCache cache, IOptions<JsonOptions> jsonOptions)
     {
         _context = context;
@@ -31,9 +31,18 @@ public class JobOffersControler :ControllerBase
         int resultsPerPage = 20;
         
         string cacheKey = $"jobOffers{page}";
+        
         var cachedJobOffers = await _cache.GetStringAsync(cacheKey);
         if (!string.IsNullOrEmpty(cachedJobOffers))
         {
+            string cachedETag = ETagService.GenerateETag(cachedJobOffers);
+            if (ETagService.IsETagValid(Request, cachedETag))
+            {
+                return StatusCode(StatusCodes.Status304NotModified);
+            }
+            
+            Response.Headers.ETag = cachedETag;
+            
             return Ok(JsonSerializer.Deserialize<object>(cachedJobOffers)); 
         }
 
@@ -53,12 +62,20 @@ public class JobOffersControler :ControllerBase
             return Redirect("" + totalPages);
         
         var response = new { jobOffers, totalPages, page };
+        
+        var jsonData = JsonSerializer.Serialize(response, _jsonOptions);
+        string eTag = ETagService.GenerateETag(jsonData);
+        
+        Response.Headers.ETag = eTag;
+        Response.Headers.CacheControl = "private";
+        
         var cacheOptions = new DistributedCacheEntryOptions
         {
             AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
             SlidingExpiration = TimeSpan.FromSeconds(30)
         };
         await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(response,_jsonOptions), cacheOptions);
+        
         return Ok(response);
     }
 
@@ -67,12 +84,20 @@ public class JobOffersControler :ControllerBase
     public async Task<IActionResult> GetJobOfferById([FromQuery] int id)
     {
         string cacheKey = $"jobOffer_{id}";
-        
+
         var cachedJobOffer = await _cache.GetStringAsync(cacheKey);
         if (!string.IsNullOrEmpty(cachedJobOffer))
         {
+            string cachedETag = ETagService.GenerateETag(cachedJobOffer);
+            if (ETagService.IsETagValid(Request, cachedETag))
+            {
+                return StatusCode(StatusCodes.Status304NotModified);
+            }
+
+            Response.Headers.ETag = cachedETag;
             return Ok(JsonSerializer.Deserialize<object>(cachedJobOffer));
         }
+
         var jobOffer = _context.JobOffers
             .Include(j => j.Reviews)
             .Include(j => j.MultiLocation)
@@ -84,15 +109,21 @@ public class JobOffersControler :ControllerBase
         {
             return NotFound();
         }
+
+        string jsonData = JsonSerializer.Serialize(jobOffer, _jsonOptions);
+        string eTag = ETagService.GenerateETag(jsonData);
         
+        Response.Headers.ETag = eTag;
+        Response.Headers.CacheControl = "private";
+
         var cacheOptions = new DistributedCacheEntryOptions
         {
             AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
             SlidingExpiration = TimeSpan.FromSeconds(60)
         };
-        await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(jobOffer, _jsonOptions), cacheOptions);
-        
+
+        await _cache.SetStringAsync(cacheKey, jsonData, cacheOptions);
+
         return Ok(jobOffer);
     }
-
 }

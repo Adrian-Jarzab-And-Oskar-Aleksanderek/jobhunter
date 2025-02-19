@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Backend.Interfaces;
 using Backend.Service;
+using Backend.Service.Caching;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -105,6 +106,8 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+
+builder.Services.AddSingleton<ETagService>();
 
 var app = builder.Build();
 
