@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250219004914_InitialCreate4")]
+    partial class InitialCreate4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,6 +138,7 @@ namespace Backend.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<List<string>>("RequiredSkills")
+                        .IsRequired()
                         .HasColumnType("text[]");
 
                     b.Property<string>("Slug")
@@ -291,13 +295,13 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "70853228-a4dc-417c-977f-e4b43dcbe6fb",
+                            Id = "3e8b29cb-4402-4c3a-a002-71eb1ad4972e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2394d278-70d5-4ec5-85e1-0479bfbebc10",
+                            Id = "0160ec29-8ae2-4751-8db0-97588769a63a",
                             Name = "User",
                             NormalizedName = "USER"
                         });

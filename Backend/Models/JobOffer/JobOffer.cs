@@ -6,7 +6,7 @@ namespace Backend.Models.JobOffer
         public int Id { get; set; }
         public string Slug { get; set; }
         public string Title { get; set; }
-        public List<string> RequiredSkills { get; set; }
+        public List<string>? RequiredSkills { get; set; }
         public List<string>? NiceToHaveSkills { get; set; }
         public string WorkplaceType { get; set; }
         public string WorkingTime { get; set; }
@@ -25,5 +25,8 @@ namespace Backend.Models.JobOffer
         public string CompanyLogoThumbUrl { get; set; }
         public string PublishedAt { get; set; }
         public bool OpenToHireUkrainians { get; set; }
+        
+        public List<JobOfferRequiredSkills> JobOfferRequiredSkills { get; set; } = new List<JobOfferRequiredSkills>();
+
     }
 }

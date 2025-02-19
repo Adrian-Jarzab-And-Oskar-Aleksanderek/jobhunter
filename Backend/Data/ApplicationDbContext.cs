@@ -15,6 +15,8 @@ namespace Backend.Data
         public DbSet<JobOffer> JobOffers { get; set; }
         public DbSet<MultiLocation> MultiLocations { get; set; }
         public DbSet<EmploymentType> EmploymentTypes { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<JobOfferRequiredSkills> JobOfferRequiredSkills { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
@@ -64,6 +66,21 @@ namespace Backend.Data
                 .WithMany(u => u.Reviews)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
+            // Relation N:N z Skill -> JobOffer
+            modelBuilder.Entity<JobOfferRequiredSkills>()
+                .HasKey(js => new { js.JobOfferId, js.SkillId });
+
+            modelBuilder.Entity<JobOfferRequiredSkills>()
+                .HasOne(js => js.JobOffer)
+                .WithMany(j => j.JobOfferRequiredSkills)
+                .HasForeignKey(js => js.JobOfferId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<JobOfferRequiredSkills>()
+                .HasOne(js => js.Skill)
+                .WithMany(s => s.JobOfferRequiredSkills)
+                .HasForeignKey(js => js.SkillId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

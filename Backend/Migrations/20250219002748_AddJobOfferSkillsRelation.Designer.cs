@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250219002748_AddJobOfferSkillsRelation")]
+    partial class AddJobOfferSkillsRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,6 +138,7 @@ namespace Backend.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<List<string>>("RequiredSkills")
+                        .IsRequired()
                         .HasColumnType("text[]");
 
                     b.Property<string>("Slug")
@@ -227,7 +231,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skill");
                 });
 
             modelBuilder.Entity("Backend.Models.Review.Review", b =>
@@ -291,13 +295,13 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "70853228-a4dc-417c-977f-e4b43dcbe6fb",
+                            Id = "0fb822c7-5a9d-44d5-b7ef-a149fb5f7db9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2394d278-70d5-4ec5-85e1-0479bfbebc10",
+                            Id = "b2e8394f-e9d9-4bb5-a012-34b2a2602095",
                             Name = "User",
                             NormalizedName = "USER"
                         });

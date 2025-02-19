@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250219003715_AddJobOfferSkillsRelation3")]
+    partial class AddJobOfferSkillsRelation3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,6 +138,7 @@ namespace Backend.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<List<string>>("RequiredSkills")
+                        .IsRequired()
                         .HasColumnType("text[]");
 
                     b.Property<string>("Slug")
@@ -291,13 +295,13 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "70853228-a4dc-417c-977f-e4b43dcbe6fb",
+                            Id = "0f84cfa9-7cf2-45d7-a6c5-4f721c61b4e9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2394d278-70d5-4ec5-85e1-0479bfbebc10",
+                            Id = "9c46bb07-153c-4841-b8c6-e7e782be0a94",
                             Name = "User",
                             NormalizedName = "USER"
                         });
