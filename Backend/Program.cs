@@ -107,8 +107,8 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+builder.Services.AddSingleton<RedisService>();
 builder.Services.AddSingleton<ETagService>();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

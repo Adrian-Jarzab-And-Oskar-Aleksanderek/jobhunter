@@ -16,13 +16,13 @@ namespace Backend.Controllers;
 public class JobOffersControler :ControllerBase
 {
     private readonly ApplicationDbContext _context;
-    private readonly IDistributedCache _cache;
     private readonly JsonSerializerOptions _jsonOptions;
-    public JobOffersControler(ApplicationDbContext context, IDistributedCache cache, IOptions<JsonOptions> jsonOptions)
+    private readonly RedisService _redisService;
+    public JobOffersControler(ApplicationDbContext context, IOptions<JsonOptions> jsonOptions, RedisService redisService)
     {
         _context = context;
-        _cache = cache;
         _jsonOptions = jsonOptions.Value.JsonSerializerOptions;
+        _redisService = redisService;
     }
     
     [HttpGet("/api/offers")]
@@ -30,12 +30,12 @@ public class JobOffersControler :ControllerBase
     {
         int resultsPerPage = 20;
         
-        string cacheKey = $"jobOffers{page}";
+        string cacheKey = $"Job_Offers_page_{page}";
         
-        var cachedJobOffers = await _cache.GetStringAsync(cacheKey);
-        if (!string.IsNullOrEmpty(cachedJobOffers))
+        var cachedJobOffersPage = await _redisService.GetData(cacheKey);
+        if (!string.IsNullOrEmpty(cachedJobOffersPage))
         {
-            string cachedETag = ETagService.GenerateETag(cachedJobOffers);
+            string cachedETag = ETagService.GenerateETag(cachedJobOffersPage);
             if (ETagService.IsETagValid(Request, cachedETag))
             {
                 return StatusCode(StatusCodes.Status304NotModified);
@@ -43,7 +43,7 @@ public class JobOffersControler :ControllerBase
             
             Response.Headers.ETag = cachedETag;
             
-            return Ok(JsonSerializer.Deserialize<object>(cachedJobOffers)); 
+            return Ok(JsonSerializer.Deserialize<object>(cachedJobOffersPage)); 
         }
 
         int totalResults = _context.JobOffers.Count();
@@ -69,13 +69,8 @@ public class JobOffersControler :ControllerBase
         Response.Headers.ETag = eTag;
         Response.Headers.CacheControl = "private";
         
-        var cacheOptions = new DistributedCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-            SlidingExpiration = TimeSpan.FromSeconds(30)
-        };
-        await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(response,_jsonOptions), cacheOptions);
-        
+        await _redisService.SaveData(cacheKey, JsonSerializer.Serialize(response, _jsonOptions), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(30));
+
         return Ok(response);
     }
 
@@ -83,9 +78,9 @@ public class JobOffersControler :ControllerBase
     [HttpGet("/api/offer")]
     public async Task<IActionResult> GetJobOfferById([FromQuery] int id)
     {
-        string cacheKey = $"jobOffer_{id}";
+        string cacheKey = $"Job_Offer_id_{id}";
 
-        var cachedJobOffer = await _cache.GetStringAsync(cacheKey);
+        var cachedJobOffer = await _redisService.GetData(cacheKey);
         if (!string.IsNullOrEmpty(cachedJobOffer))
         {
             string cachedETag = ETagService.GenerateETag(cachedJobOffer);
@@ -93,7 +88,6 @@ public class JobOffersControler :ControllerBase
             {
                 return StatusCode(StatusCodes.Status304NotModified);
             }
-
             Response.Headers.ETag = cachedETag;
             return Ok(JsonSerializer.Deserialize<object>(cachedJobOffer));
         }
@@ -115,14 +109,8 @@ public class JobOffersControler :ControllerBase
         
         Response.Headers.ETag = eTag;
         Response.Headers.CacheControl = "private";
-
-        var cacheOptions = new DistributedCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-            SlidingExpiration = TimeSpan.FromSeconds(60)
-        };
-
-        await _cache.SetStringAsync(cacheKey, jsonData, cacheOptions);
+        
+        await _redisService.SaveData(cacheKey, jsonData, TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(60));
 
         return Ok(jobOffer);
     }
