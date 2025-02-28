@@ -23,7 +23,7 @@ const HomePage = () => {
         setError(null);
         try {
             const response = await fetch(`http://localhost:5216/api/offers?page=${page}`);
-            if (response.ok) {
+            if (!response.ok) {
                 throw new Error('Error when fetching offers');
             }
             const data = await response.json();
