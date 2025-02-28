@@ -23,8 +23,8 @@ const HomePage = () => {
         setError(null);
         try {
             const response = await fetch(`http://localhost:5216/api/offers?page=${page}`);
-            if (!response.ok) {
-                // throw new Error('Error when fetching offers');
+            if (response.ok) {
+                throw new Error('Error when fetching offers');
             }
             const data = await response.json();
             setTotalPages(data.totalPages);
@@ -47,6 +47,8 @@ const HomePage = () => {
         }
     };
 
+    
+    //TO DO: OFFER DATA VALIDATION - SITE CRASH IF DON'T HAVE ANY DATA 
     const renderJobCards = () => {
         return offers.map(offer => (
             <Link to={`/offers/${offer?.id}`} key={offer?.id} style={{ textDecoration: 'none', color: 'inherit' }}>
