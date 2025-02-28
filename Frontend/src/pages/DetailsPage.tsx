@@ -53,7 +53,7 @@ const DetailsPage = () => {
     const [addingReview, setAddingReview] = useState<boolean>(false);
     const [addError, setAddError] = useState<string | null>(null);
     const [addSuccess, setAddSuccess] = useState<boolean>(false);
-
+    
     const fetchDetails = async (id: number) => {
         setLoading(true);
         setError(null);
@@ -179,6 +179,8 @@ const DetailsPage = () => {
         console.log(details);
     }, [offerId]);
 
+
+    //TO DO: OFFER DATA VALIDATION - SITE CRASH IF DON'T HAVE ANY DATA
     const renderEmploymentTypes = () => {
         if (!details?.employmentTypes.$values.length) {
             return <p className="text-center">No employment types available.</p>;
@@ -196,6 +198,7 @@ const DetailsPage = () => {
         );
     };
     
+    //TO DO: OFFER DATA VALIDATION - SITE CRASH IF DON'T HAVE ANY DATA
     const renderReviews = () => {
         if (!details?.reviews.$values.length) {
             return <p className="text-center">No reviews for this offer yet.</p>;
