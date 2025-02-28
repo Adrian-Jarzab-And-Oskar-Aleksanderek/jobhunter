@@ -45,9 +45,9 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp", builder =>
+    options.AddPolicy("AllowReactApp", b =>
     {
-        builder.WithOrigins("http://localhost:5173")
+        b.WithOrigins("http://localhost:5173")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -101,7 +101,7 @@ builder.Services.AddSwaggerGen(option =>
                     Id="Bearer"
                 }
             },
-            new string[]{}
+            []
         }
     });
 });
