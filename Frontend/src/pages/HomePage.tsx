@@ -24,7 +24,7 @@ const HomePage = () => {
         try {
             const response = await fetch(`http://localhost:5216/api/offers?page=${page}`);
             if (!response.ok) {
-                throw new Error('Error when fetching offers');
+                // throw new Error('Error when fetching offers');
             }
             const data = await response.json();
             setTotalPages(data.totalPages);
@@ -49,12 +49,12 @@ const HomePage = () => {
 
     const renderJobCards = () => {
         return offers.map(offer => (
-            <Link to={`/offers/${offer.id}`} key={offer.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to={`/offers/${offer?.id}`} key={offer?.id} style={{ textDecoration: 'none', color: 'inherit' }}>
             <JobCard
-                key={offer.id}
-                title={offer.title}
-                companyName={offer.companyName}
-                requiredSkills={offer.requiredSkills.$values}
+                key={offer?.id}
+                title={offer?.title}
+                companyName={offer?.companyName}
+                requiredSkills={offer?.requiredSkills?.$values}
             />
             </Link>
         ));

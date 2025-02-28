@@ -67,7 +67,7 @@ const DetailsPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Error when fetching details');
+                // throw new Error('Error when fetching details');
             }
 
             const data = await response.json();
@@ -92,10 +92,10 @@ const DetailsPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to delete review.');
+                // throw new Error('Failed to delete review.');
             }
 
-            fetchDetails(offerId!);
+            await fetchDetails(offerId!);
         } catch (err: any) {
             alert(err.message || 'Something went wrong while deleting the review.');
         }
@@ -124,7 +124,7 @@ const DetailsPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to edit review.');
+                // throw new Error('Failed to edit review.');
             }
 
             setShowEditModal(false);
@@ -158,7 +158,7 @@ const DetailsPage = () => {
 
             if (!response.ok) {
                 const data = await response.json();
-                throw new Error(data.message || 'Failed to add review.');
+                // throw new Error(data.message || 'Failed to add review.');
             }
 
             setAddSuccess(true);
@@ -237,15 +237,15 @@ const DetailsPage = () => {
         return (
             <Card className="mb-4 shadow-sm border-primary">
                 <Card.Body>
-                    <Card.Title className="fs-3 fw-bold">{details.title}</Card.Title>
-                    <Card.Subtitle className="mb-3 text-muted fs-5">{details.companyName}</Card.Subtitle>
+                    <Card.Title className="fs-3 fw-bold">{details?.title}</Card.Title>
+                    <Card.Subtitle className="mb-3 text-muted fs-5">{details?.companyName}</Card.Subtitle>
 
                     {renderEmploymentTypes()}
 
                     <div className="mb-3">
                         <h5>Required Skills</h5>
-                        {details.requiredSkills.$values.length > 0 ? (
-                            details.requiredSkills.$values.map((skill, index) => (
+                        {details?.requiredSkills?.$values.length > 0 ? (
+                            details?.requiredSkills?.$values.map((skill, index) => (
                                 <Badge key={index} bg="secondary" className="me-1 mb-1">
                                     {skill}
                                 </Badge>

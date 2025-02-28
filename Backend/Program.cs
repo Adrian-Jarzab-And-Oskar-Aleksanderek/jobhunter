@@ -1,5 +1,4 @@
 using Backend.Data;
-using Backend.Middleware;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -122,8 +121,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseMiddleware<RequestLoggingMiddleware>();
-
 app.UseCors("AllowReactApp");
 
 app.UseAuthentication();
