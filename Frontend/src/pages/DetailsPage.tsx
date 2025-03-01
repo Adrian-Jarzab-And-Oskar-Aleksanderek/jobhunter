@@ -58,7 +58,7 @@ const DetailsPage = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`http://localhost:5216/api/offer?id=${id}`, {
+            const response = await fetch(`https://localhost:7111/api/offer?id=${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

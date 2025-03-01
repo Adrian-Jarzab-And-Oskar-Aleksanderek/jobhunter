@@ -22,7 +22,7 @@ const LoginPage = () => {
         const loginData = { "username":email, "password":password };
 
         try {
-            const response = await fetch('http://localhost:5216/api/auth/login', {
+            const response = await fetch('https://localhost:5216/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
