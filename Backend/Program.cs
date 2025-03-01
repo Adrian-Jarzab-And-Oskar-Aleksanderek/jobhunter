@@ -56,7 +56,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme =
+    options.DefaultAuthenticateScheme = 
     options.DefaultChallengeScheme =
     options.DefaultForbidScheme =
     options.DefaultSignInScheme =
