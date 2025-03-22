@@ -1,4 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Backend.Data;
 using Backend.Models;
@@ -13,10 +12,10 @@ namespace Backend.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewControler : ControllerBase
+    public class ReviewController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public ReviewControler(ApplicationDbContext context, UserManager<User> userManager)
+        public ReviewController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
         }

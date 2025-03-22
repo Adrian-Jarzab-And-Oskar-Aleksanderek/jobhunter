@@ -4,8 +4,6 @@ using Backend.Mappers;
 using Backend.Service.Caching;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Options;
 
 namespace Backend.Controllers;
@@ -13,12 +11,12 @@ namespace Backend.Controllers;
 
 [Route("api/JobOffers")]
 [ApiController]
-public class JobOffersControler :ControllerBase
+public class JobOffersController :ControllerBase
 {
     private readonly ApplicationDbContext _context;
     private readonly JsonSerializerOptions _jsonOptions;
     private readonly RedisService _redisService;
-    public JobOffersControler(ApplicationDbContext context, IOptions<JsonOptions> jsonOptions, RedisService redisService)
+    public JobOffersController(ApplicationDbContext context, IOptions<JsonOptions> jsonOptions, RedisService redisService)
     {
         _context = context;
         _jsonOptions = jsonOptions.Value.JsonSerializerOptions;
