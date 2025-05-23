@@ -1,11 +1,15 @@
 using System.Security.Claims;
+using System.Text.Json;
 using Backend.Data;
+using Backend.Mappers;
 using Backend.Models;
 using Backend.Models.Review;
+using Backend.Service.Caching;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Backend.Controllers
 {
@@ -15,9 +19,14 @@ namespace Backend.Controllers
     public class ReviewController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public ReviewController(ApplicationDbContext context, UserManager<User> userManager)
+        private readonly UserManager<User> _userManager;
+        private readonly JsonSerializerOptions _jsonOptions;
+
+        public ReviewController(ApplicationDbContext context, UserManager<User> userManager, RedisService redisService, IOptions<JsonOptions> jsonOptions)
         {
+            _userManager = userManager;
             _context = context;
+            _jsonOptions = jsonOptions.Value.JsonSerializerOptions;
         }
 
         [HttpPost("create")]
@@ -31,8 +40,14 @@ namespace Backend.Controllers
             if (jobOffer == null)
                 return NotFound("Job offer not found.");
             
-            var userName = User.FindFirstValue(ClaimTypes.GivenName);
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized("User not authenticated");
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound("User not found");
             
             var review = new Review
             {
@@ -60,10 +75,9 @@ namespace Backend.Controllers
             if (review == null)
                 return NotFound("Review not found.");
             
-            var userName = User.FindFirstValue(ClaimTypes.GivenName);
-            var userId = await _context.Users.Where(u => u.UserName == userName)
-                .Select(u => u.Id)
-                .FirstOrDefaultAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized("User not authenticated");
             
             if (review.UserId != userId)
             {
@@ -96,21 +110,33 @@ namespace Backend.Controllers
             if (review == null)
                 return NotFound("Review not found.");
             
-            var userName = User.FindFirstValue(ClaimTypes.GivenName);
-            var userId = await _context.Users.Where(u => u.UserName == userName)
-                .Select(u => u.Id)
-                .FirstOrDefaultAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized("User not authenticated");
             
             if (review.UserId != userId)
             {
                 return Unauthorized("You can't delete this review.");
             }
             
-            
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
             return Ok(new { message = "Review deleted." });
         }
+        
+        [HttpGet("get")]
+        public async Task<IActionResult> GetAllReviewsForOffer([FromQuery] int offer)
+        {
+            var reviews = _context.Reviews
+                .Include(r => r.User)
+                .Where(r => r.JobOfferId == offer)
+                .ToList()
+                .Select(review => review.MapToReviewDto())
+                .ToList();
 
+            var response = new { reviews };
+            
+            return Ok(response);
+        }
     }
 }

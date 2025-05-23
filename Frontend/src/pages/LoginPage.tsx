@@ -1,88 +1,94 @@
-import { useState } from 'react';
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuth } from "../Context/useAuth";
+import { useForm } from "react-hook-form";
+
+type LoginFormsInputs = {
+  userName: string;
+  password: string;
+};
+
+const validation = Yup.object().shape({
+  userName: Yup.string().required("Username is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+  const { loginUser } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormsInputs>({ resolver: yupResolver(validation) });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const handleLogin = (form: LoginFormsInputs) => {
+    loginUser(form.userName, form.password);
+  };
 
-        // Basic validation
-        if (!email || !password) {
-            setError('Both email and password are required');
-            return;
-        }
+  return (
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div
+        className="card shadow-sm p-4"
+        style={{ maxWidth: "400px", width: "100%" }}
+      >
+        <h2 className="card-title text-center mb-4">Sign in to your account</h2>
+        <form onSubmit={handleSubmit(handleLogin)} noValidate>
+          <div className="mb-3">
+            <label htmlFor="userName" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="userName"
+              autoComplete="username"
+              placeholder="Username"
+              className={`form-control ${errors.userName ? "is-invalid" : ""}`}
+              {...register("userName")}
+            />
+            {errors.userName && (
+              <div className="invalid-feedback">{errors.userName.message}</div>
+            )}
+          </div>
 
-        setLoading(true);
-        setError('');
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              placeholder="••••••••"
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              {...register("password")}
+            />
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password.message}</div>
+            )}
+          </div>
 
-        const loginData = { "username":email, "password":password };
+          <div className="mb-3 d-flex justify-content-between">
+            <a href="/forgot-password" className="text-decoration-none">
+              Forgot password?
+            </a>
+          </div>
 
-        try {
-            const response = await fetch('https://localhost:5216/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(loginData),
-            });
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Sign in
+          </button>
+        </form>
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Login successful:', data);
-                // Handle successful login here (e.g. store token in localStorage)
-            } else {
-                const data = await response.json();
-                setError(data.message || 'Invalid credentials');
-            }
-        } catch (err) {
-            setError('Something went wrong');
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <>
-            <Container fluid className="d-flex flex-column jh-container-fluid" style={{ minHeight: '100vh' }}>
-                <Row className="justify-content-center align-items-center flex-grow-1">
-                    <Col md={4}>
-                        <h1 className="text-center mb-4">Login Page</h1>
-                        {error && <div className="alert alert-danger">{error}</div>}
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Enter email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </Form.Group>
-
-                            <Button variant="primary" type="submit" className="w-100" disabled={loading}>
-                                {loading ? 'Logging in...' : 'Login'}
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    );
-}
+        <div className="text-center">
+          <small>
+            Don’t have an account yet?{" "}
+            <a href="/register" className="text-decoration-none">
+              Sign up
+            </a>
+          </small>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default LoginPage;

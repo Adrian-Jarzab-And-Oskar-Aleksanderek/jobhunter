@@ -18,7 +18,7 @@ public static class ReviewMapper
             
             CreatedAt = review.CreatedAt,
             
-            User = review.User
+            User = review.User?.UserName
         };
     }
 }

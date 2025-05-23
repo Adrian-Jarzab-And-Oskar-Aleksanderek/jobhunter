@@ -19,13 +19,17 @@
     <Script Include="src\components\Footer\Footer.tsx" />
     <Script Include="src\components\JobCard\JobCard.tsx" />
     <Script Include="src\components\Navigation\Navigation.tsx" />
+    <Script Include="src\Context\userAuth.tsx" />
+    <Script Include="src\Helpers\ErrorHandler.tsx" />
     <Script Include="src\main.tsx" />
+    <Script Include="src\Models\User.ts" />
     <Script Include="src\pages\AboutPage.tsx" />
     <Script Include="src\pages\ContactPage.tsx" />
     <Script Include="src\pages\DetailsPage.tsx" />
     <Script Include="src\pages\HomePage.tsx" />
     <Script Include="src\pages\LoginPage.tsx" />
     <Script Include="src\pages\NoPage.tsx" />
+    <None Include="src\Services\AuthSerices.tsx" />
     <Script Include="src\vite-env.d.ts" />
   </ItemGroup>
   <ItemGroup>

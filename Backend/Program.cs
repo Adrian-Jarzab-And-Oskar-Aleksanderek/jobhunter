@@ -9,10 +9,13 @@ using Backend.Interfaces;
 using Backend.Service;
 using Backend.Service.Caching;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using IUserService = Backend.Interfaces.IUserService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 //Json 'repair'
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
