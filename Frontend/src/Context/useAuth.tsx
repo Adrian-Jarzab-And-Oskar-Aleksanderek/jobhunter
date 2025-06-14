@@ -18,6 +18,8 @@ type UserContextType = {
   loginUser: (username: string, password: string) => void;
   logout: () => void;
   isLoggedIn: () => boolean;
+  setToken: (token: string | null) => void;
+  setUser: (user: UserProfile | null) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -116,7 +118,16 @@ export const UserProvider = ({ children }: Props) => {
 
   return (
     <UserContext.Provider
-      value={{ user, token, registerUser, loginUser, logout, isLoggedIn }}
+      value={{
+        user,
+        token,
+        registerUser,
+        loginUser,
+        logout,
+        isLoggedIn,
+        setToken,
+        setUser,
+      }}
     >
       {isReady ? children : null}
     </UserContext.Provider>

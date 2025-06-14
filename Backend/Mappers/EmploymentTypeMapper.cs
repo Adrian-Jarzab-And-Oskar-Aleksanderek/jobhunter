@@ -1,4 +1,3 @@
-using Backend.DTO;
 using Backend.DTO.JobOffer;
 using Backend.Models.JobOffer;
 
@@ -6,7 +5,7 @@ namespace Backend.Mappers;
 
 public static class EmploymentTypeMapper
 {
-    public static EmploymentTypeDto ToEmploymentType(this EmploymentType employmentType)
+    public static EmploymentTypeDto ToEmploymentTypeDto(this EmploymentType employmentType)
     {
         return new EmploymentTypeDto
         {

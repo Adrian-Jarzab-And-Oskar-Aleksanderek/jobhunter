@@ -1,4 +1,3 @@
-using Backend.DTO;
 using Backend.DTO.JobOffer;
 using Backend.Models.JobOffer;
 namespace Backend.Mappers;
@@ -12,18 +11,16 @@ public static class JobOfferMapper
             Id = jobOffer.Id,
             Slug = jobOffer.Slug,
             Title = jobOffer.Title,
-            RequiredSkills = jobOffer.RequiredSkills,
+            RequiredSkills = jobOffer.RequierdSkills
+                .Select(requierdSkills => RequiredSkillsMapper.MapRequiredSkillsDto(requierdSkills))
+                .ToList(),
             NiceToHaveSkills = jobOffer.NiceToHaveSkills,
             WorkplaceType = jobOffer.WorkplaceType,
             WorkingTime = jobOffer.WorkingTime,
             ExperienceLevel = jobOffer.ExperienceLevel,
             
-            Reviews = jobOffer.Reviews
-                .Select(review => ReviewMapper.MapToReviewDto(review))
-                .ToList(),
-            
             EmploymentTypes = jobOffer.EmploymentTypes
-                .Select(employmentType => EmploymentTypeMapper.ToEmploymentType(employmentType))
+                .Select(employmentType => EmploymentTypeMapper.ToEmploymentTypeDto(employmentType))
                 .ToList(),
             
             MultiLocation = jobOffer.MultiLocation
@@ -33,7 +30,7 @@ public static class JobOfferMapper
             City = jobOffer.City,
             Street = jobOffer.Street,
             RemoteInterview = jobOffer.RemoteInterview,
-            CompanyName = jobOffer.CompanyName,
+            Company = CompanyMapper.MapCompanyDto(jobOffer.Company),
         };
     }
 }

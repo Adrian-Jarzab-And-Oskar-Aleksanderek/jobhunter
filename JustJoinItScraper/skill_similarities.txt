@@ -1,0 +1,21 @@
+agile methodology: Agile Methodology, Agile Methodologies
+agile transformations: Agile Transformations, Agile Transformation
+csharp: CSharp, C Sharp, FSharp
+postgresql: PostgreSQL, Postgres
+mysql: MySQL, MSSQL
+mongodb: MongoDB, Mongo DB
+neo4j: Neo4J, Neo4j
+couch db: Couch DB, CouchDB
+cockroachdb: Cockroachdb, Cockroach DB
+reactjs: ReactJS, React.js, React JS
+angularjs: AngularJS, Angular.js, Angular JS
+vuejs: VueJS, Vue.js, Vue JS
+next.js: Next.js, NextJS, Next JS, Nest.js, Nuxt.js
+express.js: Express.js, ExpressJS
+nestjs: NestJS, Nest JS
+koa.js: Koa.js, KoaJS, Koa JS
+nuxtjs: NuxtJS, Nuxt JS
+ember.js: Ember.js, EmberJS, Ember JS
+backbone.js: Backbone.js, BackboneJS, Backbone JS
+jenkins ci: Jenkins CI, Jenkins CD
+pytest: PyTest, Pytest

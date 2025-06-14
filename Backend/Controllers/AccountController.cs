@@ -14,14 +14,12 @@ public class AccountController :ControllerBase
 {
     private readonly UserManager<User> _userManager;    
     private readonly ITokenService _tokenService;
-    private readonly SignInManager<User> _signInManager;
     private readonly IUserService _userService;
     
-    public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager, IUserService userService)
+    public AccountController(UserManager<User> userManager, ITokenService tokenService, IUserService userService)
     {
         _userManager = userManager;
         _tokenService = tokenService;
-        _signInManager = signInManager;
         _userService = userService;
     }
     
@@ -89,9 +87,9 @@ public class AccountController :ControllerBase
         if(user == null)
             return Unauthorized("Invalid username or password");
         
-        var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+        var result = await _userService.CheckPasswordAsync(user, loginDto.Password);
         
-        if(!result.Succeeded)
+        if(!result)
             return Unauthorized("Invalid username or password");
 
         return Ok(new NewUserDto
@@ -133,7 +131,12 @@ public class AccountController :ControllerBase
         if(!result.Succeeded)
             return BadRequest(result.Errors);
         
-        return Ok($"Changed username to : {changeUsernameDto.newUserName}");
+        return Ok(new NewUserDto
+        {
+            UserName = user.UserName,
+            Email = user.Email,
+            Token = _tokenService.GenerateToken(user)
+        });
     }
 
     [HttpPost("ChangePassword")]
@@ -151,13 +154,16 @@ public class AccountController :ControllerBase
         if (user == null)
             return NotFound("User not found");
 
-        var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.actualPassword, changePasswordDto.NewPassword);
+        var result = await _userService.ChangePasswordAsync(user, changePasswordDto.ActualPassword, changePasswordDto.NewPassword);
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
-        await _signInManager.RefreshSignInAsync(user);
-    
-        return Ok("Password changed successfully");
+        return Ok(new NewUserDto
+        {
+            UserName = user.UserName,
+            Email = user.Email,
+            Token = _tokenService.GenerateToken(user)
+        });
     }
     
     [HttpPost("ChangeEmail")]
@@ -175,15 +181,18 @@ public class AccountController :ControllerBase
         if (user == null)
             return NotFound("User not found");
         
-        var result = await _userManager.ChangeEmailAsync(user, changeEmailDto.actualEmail, changeEmailDto.newEmail);
+        var result = await _userService.ChangeEmailAsync(user, changeEmailDto.newEmail);
         if (!result.Succeeded)
         {
             return BadRequest(result.Errors);
         }
-
-        await _signInManager.RefreshSignInAsync(user);
     
-        return Ok("Email changed successfully");
+        return Ok(new NewUserDto
+        {
+            UserName = user.UserName,
+            Email = user.Email,
+            Token = _tokenService.GenerateToken(user)
+        });
     }
 
     [HttpPost("ForgotPassword")]

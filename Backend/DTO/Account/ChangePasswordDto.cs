@@ -5,7 +5,7 @@ namespace Backend.DTO.Account;
 public class ChangePasswordDto
 { 
     [Required]
-    public string actualPassword { get; set; }
+    public string ActualPassword { get; set; }
     [Required]
     public string NewPassword { get; set; }
 }

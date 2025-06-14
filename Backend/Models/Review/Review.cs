@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Backend.Models.JobOffer;
+
 namespace Backend.Models.Review;
 
 public class Review
@@ -14,13 +16,12 @@ public class Review
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    [ForeignKey("JobOffer")]
-    public int JobOfferId { get; set; }
-
-    public JobOffer.JobOffer? JobOffer { get; set; }
+    [Required]
+    [ForeignKey("Company")]
+    public int CompanyId { get; set; }
+    public Company Company { get; set; }
     
     [ForeignKey("User")]
     public string? UserId { get; set; }
-
     public User? User { get; set; }
 }

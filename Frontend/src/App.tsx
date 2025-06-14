@@ -7,8 +7,10 @@ import DetailsPage from "./pages/DetailsPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LogoutPage from "./pages/LogoutPage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CompanyProfilePage from "./pages/CompanyProfilePage";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/company/:id" element={<CompanyProfilePage />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </>

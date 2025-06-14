@@ -1,0 +1,28 @@
+.filter-card {
+  width: 300px;
+  position: sticky;
+  top: 20px;
+  margin-right: 20px;
+  background-color: white;
+  z-index: 100;
+  opacity: 1;
+  visibility: visible;
+}
+
+.filter-card .form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.filter-card .form-control,
+.filter-card .form-select {
+  border-radius: 4px;
+}
+
+.filter-card .btn-primary {
+  border-radius: 0 4px 4px 0;
+}
+
+.filter-card .input-group .form-control {
+  border-radius: 4px 0 0 4px;
+}

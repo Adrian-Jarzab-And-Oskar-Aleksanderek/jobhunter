@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Backend.Models.JobOffer;
 
 namespace Backend.DTO.JobOffer;
 
@@ -14,10 +15,10 @@ public class JobOfferDto
     public string Title { get; set; }
     
     [JsonPropertyName("requiredSkills")]
-    public List<string> RequiredSkills { get; set; }
+    public List<RequiredSkillsDto> RequiredSkills { get; set; }
     
     [JsonPropertyName("niceToHaveSkills")]
-    public List<string>? NiceToHaveSkills { get; set; }
+    public List<NiceToHaveSkills> NiceToHaveSkills { get; set; }
     
     [JsonPropertyName("workplaceType")]
     public string WorkplaceType { get; set; }
@@ -27,9 +28,6 @@ public class JobOfferDto
     
     [JsonPropertyName("experienceLevel")]
     public string ExperienceLevel { get; set; }
-    
-    [JsonPropertyName("reviews")]
-    public ICollection<ReviewDto>? Reviews { get; set; } = new List<ReviewDto>();
     
     [JsonPropertyName("employmentTypes")]
     public ICollection<EmploymentTypeDto>? EmploymentTypes { get; set; } = new List<EmploymentTypeDto>();
@@ -46,6 +44,7 @@ public class JobOfferDto
     [JsonPropertyName("remoteInterview")]
     public bool RemoteInterview { get; set; }
     
-    [JsonPropertyName("companyName")]
-    public string CompanyName { get; set; }
+    [JsonPropertyName("company")]
+    public CompanyDto Company { get; set; }
+
 }

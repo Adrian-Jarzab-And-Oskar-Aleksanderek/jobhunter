@@ -1,0 +1,526 @@
+agile: Agile, agile
+agile methodology: Agile Methodology, Agile Methodologies, agile methodologies, agile methodology
+agile practice: Agile Practice, agile practice
+agile software development: Agile Software Development, agile software development
+scrum: Scrum, scrum
+scrum master: Scrum Master, scrum master
+kanban: Kanban, kanban, kaban
+safe: SAFe, safe
+agile coach: Agile Coach, agile coach
+agile product management: Agile Product Management, agile product management
+agile release train: Agile Release Train, agile release train
+agile transformations: Agile Transformations, Agile Transformation, agile transformations
+agile & waterfall: Agile & Waterfall, agile&waterfall
+waterfall: Waterfall, waterfall
+agile certification: Agile Certification, agile certification
+agile certified practitioner: Agile Certified Practitioner, agile certified practitioner
+javascript: JavaScript, javascript, java script
+js: JS, js
+ecmascript: ECMAScript, ecmascript, ecma script, ecmascript 6
+html/css: HTML/CSS, html/css, html / css
+html: HTML, html, html5
+css: CSS, css
+python: Python, python, python3
+sql: SQL, sql
+typescript: TypeScript, typescript, type script
+bash/shell: Bash/Shell, bash/shell
+shell: Shell, shell
+bash: Bash, bash
+java: Java, java
+c#: C#, c#
+csharp: CSharp, C Sharp, FSharp
+c++: C++, c++
+c: C, c
+php: PHP, php
+powershell: PowerShell, powershell, power shell
+go: Go, go
+golang: Golang, golang, golong
+rust: Rust, rust
+kotlin: Kotlin, kotlin
+lua: Lua, lua
+dart: Dart, dart, darts
+ruby: Ruby, ruby
+swift: Swift, swift
+r: R, r
+visual basic: Visual Basic, visual basic
+vb: VB, vb
+matlab: MATLAB, matlab
+vba: VBA, vba
+groovy: Groovy, groovy, groove
+scala: Scala, scala, scada
+perl: Perl, perl, pearl
+gdscript: GDScript, gscript
+objective-c: Objective-C, objective-c
+elixir: Elixir, elixir
+haskell: Haskell, haskell
+delphi: Delphi, delphi
+clojure: Clojure, clojure
+solidity: Solidity, solidity
+erlang: Erlang, erlang
+f#: F#, f#
+apex: Apex, apex
+prolog: Prolog, prolog
+cobol: Cobol, cobol
+zephyr: Zephyr, zephyr
+postgresql: PostgreSQL, Postgres, postgresql, postresql, postqresql, postgres, posgresql
+mysql: MySQL, MSSQL, mysql, mssql
+sqlite: SQLite, sqlite
+microsoft sql server: Microsoft SQL Server, microsoft server, microsoft sql server
+sql server: SQL Server, sql server
+mongodb: MongoDB, Mongo DB, mongodb, mongo db
+redis: Redis, redis
+mariadb: MariaDB, mariadb
+elasticsearch: Elasticsearch, elasticsearch, elastic search
+oracle: Oracle, oracle
+oracle db: Oracle DB, oracle db, oracle dba, oracledb
+dynamodb: DynamoDB, dynamodb, dynamo db
+firebase: Firebase, firebase
+bigquery: BigQuery, bigquery, big query
+supabase: Supabase, supbase, supabase
+cosmos db: Cosmos DB, cosmosdb, cosmos db
+snowflake: Snowflake, snowflake, snowlake
+influxdb: InfluxDB, influxdb
+cassandra: Cassandra, cassandra
+neo4j: Neo4J, Neo4j, neo4j
+db2: DB2, db2
+clickhouse: Clickhouse, clickhouse
+solr: Solr, solr
+duckdb: DuckDB, duckdb
+firebird: Firebird, firebird
+couch db: Couch DB, CouchDB
+cockroachdb: Cockroachdb, Cockroach DB, cockroachdb
+aws: AWS, aws
+amazon web services: Amazon Web Services, amazon web services
+amazon aws: Amazon AWS, amazon aws, amazon eks
+azure: Azure, azure, axure
+microsoft azure: Microsoft Azure, microsoft azure
+gcp: GCP, gcp
+google cloud: Google Cloud, google cloud
+google cloud platform: Google Cloud Platform, google cloud platform
+vercel: Vercel, vercel
+react: React, react
+reactjs: ReactJS, React.js, React JS, reactjs, react.js
+angular: Angular, angular
+angularjs: AngularJS, Angular.js, Angular JS, angularjs, angular.js
+vue: Vue, vue
+vuejs: VueJS, Vue.js, Vue JS, vue.js, vuejs
+next.js: Next.js, NextJS, Next JS, Nest.js, Nuxt.js, nest.js, next.js, nuxt.js, nextjs
+express.js: Express.js, ExpressJS, express.js
+django: Django, django
+flask: Flask, flask
+spring: Spring, spring
+spring boot: Spring Boot, spring boot, springboot
+asp.net: ASP.NET, asp.net
+asp.net core: ASP.NET Core, asp.net core
+laravel: Laravel, laravel
+ruby on rails: Ruby on Rails, ruby on rails, ruby on rails 6
+rails: Rails, grails
+ror: RoR, ror
+fastapi: FastAPI, fastapi, fast api
+nestjs: NestJS, Nest JS, nestjs
+koa.js: Koa.js, KoaJS, Koa JS
+play framework: Play Framework, play framework
+svelte: Svelte, svelte, svelt
+nuxtjs: NuxtJS, Nuxt JS, nuxtjs
+ember.js: Ember.js, EmberJS, Ember JS, ember.js
+backbone.js: Backbone.js, BackboneJS, Backbone JS
+jquery: jQuery, jquery, xquery
+docker: Docker, docker
+kubernetes: Kubernetes, kubernetes, kuberentes
+k8s: K8s, k8s
+jenkins: Jenkins, jenkins
+jenkins ci: Jenkins CI, Jenkins CD
+git: Git, git
+terraform: Terraform, terraform
+ansible: Ansible, ansible, ansibe, asible
+puppet: Puppet, puppet
+chef: Chef, chef
+prometheus: Prometheus, prometheus, , prometheus
+grafana: Grafana, grafana
+elk stack: ELK Stack, elk stack
+elastic stack: Elastic Stack, elastic stack, elastistack
+gitlab ci: GitLab CI, gitlab ci
+gitlab ci/cd: GitLab CI/CD, gitlab ci/cd
+github actions: GitHub Actions, github actions
+circleci: CircleCI, circleci
+teamcity: TeamCity, teamcity
+bamboo: Bamboo, bamboo
+jest: Jest, jest
+junit: JUnit, junit, nunit
+pytest: PyTest, Pytest, pytest
+selenium: Selenium, selenium
+cypress: Cypress, cypress
+mocha: Mocha, mocha
+chai: Chai, chai
+jasmine: Jasmine, jasmine
+karma: Karma, karma
+playwright: Playwright, playwright
+puppeteer: Puppeteer, puppeteer
+testng: TestNG, testing, testng, testnq
+robot framework: Robot Framework, robot framework
+cucumber: Cucumber, cucumber
+specflow: SpecFlow, specflow
+github: GitHub, github
+gitlab: GitLab, gitlab
+jira: Jira, jira
+confluence: Confluence, confluence
+vs code: VS Code, vscode, vs code
+visual studio code: Visual Studio Code, visual studio code
+visual studio: Visual Studio, visual studio
+intellij: IntelliJ, intellij
+eclipse: Eclipse, eclipse
+postman: Postman, postman
+swagger: Swagger, swagger
+openapi: OpenAPI, openapi, openai
+figma: Figma, figma
+adobe xd: Adobe XD, adobe xd
+sketch: Sketch, sketch
+slack: Slack, slack
+microsoft teams: Microsoft Teams, microsoft teams, microsoft tfs
+trello: Trello, trello
+asana: Asana, asana
+react native: React Native, react native, reactnative
+flutter: Flutter, flutter
+xamarin: Xamarin, xamarin
+ionic: Ionic, sonic, ionic
+tensorflow: TensorFlow, tensorflow
+pytorch: PyTorch, pytorch
+keras: Keras, keras
+opencv: OpenCV, opencv, opencl
+spacy: SpaCy, spacy
+hugging face: Hugging Face, huggingface, hugginface, hugging face
+unity: Unity, unity
+unreal engine: Unreal Engine, unreal engine, unreal engine 5
+phaser: Phaser, phaser
+web3.js: Web3.js, web3.js
+web3: Web3, web3
+ethereum: Ethereum, ethereum
+owasp: OWASP, owasp
+burp suite: Burp Suite, burp suite
+metasploit: Metasploit, metasploit
+wireshark: Wireshark, wireshark
+nmap: Nmap, nmap
+kali: Kali, kiali
+sap: SAP, sap
+sap erp: SAP ERP, sap erp
+sap r/3: SAP R/3, sap r/3
+sap ecc: SAP ECC, sap ecc
+sap hana: SAP HANA, sap hana, sap s4hana, sap4hana, sap 4hana
+sap abap: SAP ABAP, sap abap
+abap: ABAP, abap
+cybersecurity: cybersecurity, cyber security
+active directory: active directory, acitive directory
+design system: design system, design systems
+servicenow: servicenow, service now
+web services: web services, webservices, webservice
+swiftui: swiftui, swiftul
+risk controls: risk controls, cis controls
+php 7.x: php 7.x, php 8.x
+php 8: php 8, php 7
+rest api: rest api, rest-api, rest apis, restapi, (rest) api
+relational databases: relational databases, non-relational databases
+vmware: vmware, vmare
+.net framework: .net framework, enity framework, .net framework 4+
+entity framework: entity framework, entity framework 5
+unit testing: unit testing, ui testing
+node.js: node.js, nodejs
+enterprise architect: enterprise architect, enterprise architecture
+microsoft dynamics 365: microsoft dynamics 365, microsoft dynamics 365 crm, microsoft dynamics, microsoft dynamics d365, microsoft dynamics crm
+power platform: power platform, power platfom
+cloudformation: cloudformation, cloud formation
+aws cdk: aws cdk, aws sdk
+ci/cd: ci/cd, cicd
+power apps: power apps, powerapps
+power automate: power automate, powerautomate
+microsoft office 365: microsoft office 365, microsoft office
+mitre att&ck: mitre att&ck, mitre attack
+project management: project management, product management, it project management
+networks: networks, network
+data: data, odata
+cisco: cisco, ciso
+sd-wan: sd-wan, sdwan
+palo alto: palo alto, paloalto
+sdlc: sdlc, ssdlc
+power bi: power bi, powerbi
+google analytics: google analytics, google analytics 4
+databricks: databricks, databrics, data bricks
+api testing: api testing, api  testing, a/b testing, ab testing
+network protocols: network protocols, networking protocols
+informatica: informatica, informatyka
+data analysis: data analysis, data analystics, data analytics, data analysys
+sapui5: sapui5, sap ui5
+sap s/4 hana: sap s/4 hana, sap s/4hana
+java ee: java ee, java se
+llms: llms, llm's
+windows server: windows server, ms windows server, windows services, windows serwer, windows server os
+system administration: system administration, it systems administration, server administration, systems administration
+mac os: mac os, macos
+sap mm: sap mm, sap mdm, sap wm, sap pm, sap tm
+business analysis: business analysis, business analytics
+bpmn: bpmn, bpmn2
+microsoft 365: microsoft 365, microsoft d365
+customerservice: customerservice, customer service
+hibernate: hibernate, nhibernate
+restful api: restful api, restful apis
+sap pp: sap pp, sap po, sap pi, sap ptp, sap ps, sap p2p
+sap fico: sap fico, sap fi/co
+java 21: java 21, java 11, java 21+
+angular 18+: angular 18+, angular 2+, angular 17, angular 9+, angular16+, angular 14+, angular 16+, angular 15+, angular 16, angular v18+, angular 17+, angular 15
+soapui: soapui, soap ui
+t-sql: t-sql, tsql
+istqb foundation: istqb foundation, itil foundation
+rabbitmq: rabbitmq, rabbit mq
+sparx: sparx, spark
+microservice architecture: microservice architecture, microservices architecture, java microservices architecture
+automated testing: automated testing, automation testing
+ms sql: ms sql, ms-sql
+databases: databases, database
+graph api: graph api, graphql api, graphapi
+prince2: prince2, prince 2
+c++11: c++11, c++17
+oauth: oauth, oauth2
+ms dynamics 365: ms dynamics 365, dynamics 365, crm dynamics 365
+digital projects: digital projects, digital products
+azure ad: azure ad, azure avd, azure ai
+rest-assured: rest-assured, rest assured, restassured
+problem solving: problem solving, problem-solving
+sdk integration: sdk integration, api integration, sap integrations, crm integration, sap integration, it integration
+relacyjne bazy danych: relacyjne bazy danych, nierelacyjne bazy danych
+redhat: redhat, red hat
+plsql: plsql, pl/sql
+data modeling: data modeling, data modelling
+data engineering: data engineering, data engineer
+cloud platforms: cloud platforms, cloud plaforms
+data governance: data governance, it governance
+core data: core data, coredata
+integration: integration, integrations
+clean code: clean code, clean coder
+e-commerce: e-commerce, ecommerce
+bcbs239: bcbs239, bcbs 239
+spring mvc: spring mvc, springmvc
+containers: containers, container
+ubuntu: ubuntu, ununtu
+oracle sql: oracle sql, oracle soa
+embedded: embedded, embedded c
+threatmodeling: threatmodeling, threat modelling, threat modeling
+kotlin or java: kotlin or java, kotlin lub java
+sap sf: sap sf, sap s, sap sd
+helpdesk: helpdesk, help desk
+.net 6: .net 6, .net 8, .net 9
+o9 solutions: o9 solutions, ai solutions
+s/4 hana: s/4 hana, s/4hana
+websocket: websocket, websockets
+testrail: testrail, test rail
+yacto: yacto, yocto
+web applications: web applications, gps applications
+field service management: field service management, it service management, jira service management
+generative ai: generative ai, generativeai
+langchain: langchain, nangchain
+javascript es6+: javascript es6+, javascript (es6+, javascript es6
+it security: it security, ot security
+argocd: argocd, argo cd
+igaming: igaming, gaming
+risk management: risk management, bid management, it management, test management, time management
+data visualisation: data visualisation, data visualization, data vizualization
+web api: web api, webapi, web apis
+azure databricks: azure databricks, azure data brics, azure databrics
+linux / unix: linux / unix, linux/unix
+firewall: firewall, firewalls
+api automation: api automation, ui automation, data automation
+service desk: service desk, servicedesk
+pos systems: pos systems, mes systems
+team management: team management, lead management, tax management
+genai: genai, gen ai
+azure cloud adoption framework: azure cloud adoption framework, cloud adoption framework
+data warehousing: data warehousing, data warehouse
+bootstrap: bootstrap, bootstrap 4, bootstrap 5
+devops tolls: devops tolls, devops tools
+agile scrum master: agile scrum master, tribe scrum master
+orm frameworks: orm frameworks, llm frameworks
+cloud architecture: cloud architecture, clean architecture
+iso 27001: iso 27001, iso 27000, iso27001, iso 27005
+css3: css3, css 3
+data architecture: data architecture, data architect, kafka architecture
+data management: data management, patch management, api management, state management
+er modeling: er modeling, 3d modeling
+threat analysis: threat analysis, test analysis
+microsoft crm: microsoft crm, microsoft ce, microsoft alm
+no-code: no-code, no code
+tech leading: tech leading, team leading
+azure app service: azure app service, azure app services
+soap/rest: soap/rest, soap / rest
+data lake: data lake, delta lake
+język angiel: język angiel, język angielski
+2d animations: 2d animations, 3d animation
+animation: animation, animations
+dataverse: dataverse, data verse
+pentests: pentests, pentest
+ui design: ui design, ux design
+openshift: openshift, open shift
+4hana: 4hana, s4hana
+tailwindcss: tailwindcss, tailwind css, tailwindscss
+performance testing: performance testing, performance testing., performance tuning
+people management: people management, problem management
+dynatrace: dynatrace, dynatrance
+platform engineering: platform engineering, platform engineer
+programme management: programme management, program management
+qtest: qtest, gtest, test
+oracle cloud infrastructure: oracle cloud infrastructure, azure cloud infrastructure
+java 17: java 17, java 17+
+teamwork: teamwork, team work
+api management platforms: api management platforms, ibm api management platform
+event driven architecture: event driven architecture, event-driven architecture, event-driven-architecture
+matillion: matillion, matilion
+waf solutions: waf solutions, nac solutions
+3d visualization: 3d visualization, 2d visualization
+power query: power query, powerquery
+stakeholder management: stakeholder management, stakeholders management
+it infrastructure: it infrastructure, infrastructure, aws infrastructure
+checkpoint: checkpoint, check point
+windows server 2016: windows server 2016, windows server 2019
+java 8+: java 8+, java 8
+windows administration: windows administration, windows/ad administration
+technical leadership: technical leadership, technical leader
+administrator: administrator, administration
+soar: soar, sonar
+iot projects: iot projects, it projects
+application support: application support, application supporting
+slum: slum, slurm
+d365 f&o: d365 f&o, d365f&o
+micro frontends: micro frontends, micro-frontend, micro-frontends, micro frontend, microfrontends
+qlik sense: qlik sense, qliksense
+sap successfactors: sap successfactors, sap successfactor
+gitlab/jenkins: gitlab/jenkins, gitlab, jenkins
+testcontainers: testcontainers, test containers
+eventhub: eventhub, event hubs
+servicebus: servicebus, service bus, nservicebus
+data algorithms: data algorithms, dtaa algorithms
+bazel: bazel, babel, basel
+red hat openshift: red hat openshift, redhat openshift
+windows 10: windows 10, windows 11, windows ad
+python 3: python 3, python 3.x
+contenerization: contenerization, containerization
+audio digital signal processing: audio digital signal processing, digital signal processing
+ferryt de: ferryt de, ferryt rde
+zarządzanie projektami: zarządzanie projektami, zarządzanie projektami it
+new relic: new relic, newrelic
+master data management: master data management, test data management
+cloud infrastructure management: cloud infrastructure management, infrastructure management
+angular 7: angular 7, angular 2, angular 5, angular 6
+(python or bash: (python or bash, python or bash
+wan/lan/wlan: wan/lan/wlan, lan/wan/wlan
+cloud security: cloud security, cloudsecurity
+requirements analysis: requirements analysis, requirement analysis
+finances: finances, finance
+erp implementation: erp implementation, sap implementation
+azure data lake storage: azure data lake storage, azure data lake store
+odata services: odata services, odata service
+hbase: hbase, jbase
+cloud infrastructure: cloud infrastructure, cloud & infrastructure, cloud infastructure
+iaas: iaas, ipaas, aiaas
+system integrations: system integrations, system integration
+rpa platform: rpa platform, rpa platforms
+sap hcm: sap hcm, sap ccm
+alm methodologies: alm methodologies, ai methodologies, uat methodologies
+business objects: business objects, sap business objects
+genesys cloud cx: genesys cloud cx, genesys cloud
+batchcom: batchcom, bathcom
+chatbots: chatbots, chatbot
+mlops: mlops, ml ops
+app services: app services, ai services
+spring framework: spring framework, spring frameworks
+vanilla js: vanilla js, vanillajs, vanilla.js
+material ui: material ui, materialui
+test automation frameworks: test automation frameworks, automation frameworks
+finance sector: finance sector, financial sector
+six sigma: six sigma, six-sigma
+sap fi: sap fi, sap ci
+composer: composer, compose
+apache airflow: apache airflow, apache aiflow
+systems analysis: systems analysis, system analysis
+mobile app testing: mobile app testing, mobile game testing
+pub/sub: pub/sub, pubsub, pub/sup
+spine: spine, spice
+dagger: dagger, dagger2
+cmake: cmake, make
+pen testing: pen testing, pentesting, web testing
+pentester: pentester, pen tester
+cricital thinging: cricital thinging, critical thinking
+devsecops: devsecops, devssecops
+omniscript: omniscript, ommiscript
+solution architect: solution architect, solution architecture
+sap/crm: sap/crm, sap crm
+ibm websphere mq: ibm websphere mq, ibm websphere
+portfolio management: portfolio management, lean portfolio management
+web development: web development, ai development, api development
+ai techniques: ai techniques, ml techniques
+microsoft dynamics 365 business central (al/bc): microsoft dynamics 365 business central (al/bc), microsoft dynamics 365 business central
+mobile application: mobile application, mobile applications
+itil processes: itil processes, etl processes
+microsoft excel: microsoft excel, micosoft excel
+vertx: vertx, vert.x
+real time audio processing: real time audio processing, real time data processing
+site reliability engineering: site reliability engineering, site reliability engineer
+katalon: katalon, katolon
+2nd level support: 2nd level support, 2nd line support
+open text: open text, opentext
+e-reporting: e-reporting, reporting
+react-query: react-query, react query
+mobile application development: mobile application development, web application development
+r2r processes: r2r processes, hr processes
+warehouse management: warehouse management, sap warehouse management
+ms sql databases: ms sql databases, sql databases
+citrix: citrix, bitrix
+symfony 6: symfony 6, symfony 4, symfony 5+
+event management: event management, defect management
+lightning web components: lightning web components, lightning components
+migration: migration, migrations
+java shell scripting: java shell scripting, unix shell scripting
+investment banks: investment banks, investment banking
+prawo jazdy kat.b: prawo jazdy kat.b, prawo jazdy kat. b
+informatica powercenter: informatica powercenter, informatica power center
+crm integrations: crm integrations, ai integrations
+sap hr: sap hr, sap tr
+dax studio: dax studio, data studio
+it manager: it manager, mq manager
+jetty: jetty, netty
+retrieval-augmented generation: retrieval-augmented generation, retrieval augmented generation (rag)
+process mining: process mining, process mapping
+etl testing: etl testing, hil testing
+cross-functional collaboration: cross-functional collaboration, cross-functional team collaboration
+audio: audio, audit
+av installation: av installation, installation
+hr systems: hr systems, hrcm systems, it systems
+microsoft iis: microsoft iis, microsoft bi
+sap drc: sap drc, sap grc
+azure openai: azure openai, azure open ai
+ibm i: ibm i, ibmi
+4g/5g knowledge: 4g/5g knowledge, 4g5g knowledge
+kusto query language  (kql): kusto query language  (kql), kusto query langugage (kql)
+edr solutions: edr solutions, mdm solutions
+arima: arima, aria, ariba
+marketing automation: marketing automation, writing automation
+risk modelling: risk modelling, risk modeling
+risk analysis: risk analysis, risk analyst
+successfactors: successfactors, success factors
+logs analysis: logs analysis, log analysis
+it network technology: it network technology, network technology
+itil framework: itil framework, rails framework
+f5 technologies: f5 technologies, llm technologies
+ms dynamics 365 crm: ms dynamics 365 crm, ms dynamics 365 f&o
+ms dynamics 365 buisness central: ms dynamics 365 buisness central, ms dynamics business central
+open telemetry: open telemetry, opentelemetry
+ami cloud: ami cloud, ali cloud
+salesforce mediacloud: salesforce mediacloud, sales force media cloud
+data pipelining: data pipelining, data pipelines
+security risk: security risk, security risks
+prince2/pmp: prince2/pmp, prince2, pmp
+kondor+: kondor+, kondor
+javascript/typescript: javascript/typescript, javascrip/typescript
+informatica idmc: informatica idmc, informatica mdm
+software development lifecycle: software development lifecycle, secure software development lifecycle
+qlik server: qlik server, qgis server
+badania ilościowe: badania ilościowe, badania jakościowe
+tensorflow and pytorch: tensorflow and pytorch, tensorflow / pytorch
+internal communications: internal communications, external communications
+directx 11: directx 11, directx 12

@@ -1,4 +1,6 @@
 .card {
-    background: transparent !important;
-    color: #fff !important;
+  background: transparent !important;
+  color: #fff !important;
+  width: 100%;
+  margin: auto;
 }

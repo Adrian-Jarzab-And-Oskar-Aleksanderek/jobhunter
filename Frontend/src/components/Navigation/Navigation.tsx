@@ -2,9 +2,10 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useAuth } from "../../Context/useAuth";
 import "./Navigation.css";
+import { Dropdown } from "react-bootstrap";
 
 const Navigation = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const { user, isLoggedIn, logout } = useAuth();
 
   return (
     <Navbar
@@ -44,13 +45,22 @@ const Navigation = () => {
             )}
 
             {isLoggedIn() && (
-              <Nav.Link
-                onClick={() => logout()}
-                className="jh-navbar-text"
-                style={{ cursor: "pointer" }}
-              >
-                Logout
-              </Nav.Link>
+              <Nav.Item>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="link"
+                    className="nav-link jh-navbar-text"
+                    style={{ cursor: "pointer" }}
+                  >
+                    {user?.userName}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/profile">User Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Nav.Item>
             )}
           </Nav>
         </Navbar.Collapse>

@@ -12,6 +12,7 @@ namespace Backend.Models.JobOffer
         public double Longitude { get; set; }
         [ForeignKey("JobOffer")]
         public int JobOfferId { get; set; }
+
         public JobOffer JobOffer { get; set; }
     }
 }
